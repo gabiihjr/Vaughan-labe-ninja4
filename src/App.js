@@ -1,10 +1,13 @@
 import React from 'react'
-import { AppContainer } from './components/AppContainer'
 
-function App() {
-	return (
-        <AppContainer />
-	)
+class App extends React.Component {
+	render () {
+		return (
+			<div>
+				Teste
+			</div>
+		)
+	}
 }
 
 export default App
