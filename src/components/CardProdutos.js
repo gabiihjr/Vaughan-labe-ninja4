@@ -503,31 +503,10 @@ box-sizing: border-box;
 
 
 
-
 export default class CardProdutos extends Component {
 
 
 
-  // transformando as data mas ainda procurando uma forma melhor de fazer. 
-   //  data1 = ()=> {
-
-  //   const date = new Date('2022-12-30T00:00:00.000Z');
-  //   let year = date.getFullYear();
-  //   let month = date.getMonth()+1;
-  //   const dt = date.getDate();
-
-  //   if (dt < 10) {
-  //     dt = '0' + dt;
-  //   }
-  //   if (month < 10) {
-  //     month = '0' + month;
-  //   }
-
-  //   console.log(year+'-' + month + '-'+dt);
-  // }
-
-
-  
   render() {
     
       // this.data1()
