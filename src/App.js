@@ -1,9 +1,9 @@
 import React from 'react'
-import { createGlobalStyle } from 'styled-components'
+import styled , { createGlobalStyle } from 'styled-components'
 import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
 import PaginaListagem from './pages/PaginaListagem';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
@@ -18,10 +18,12 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 
-const BotaoTeste = styled.button`
-	background-color: #7867BF;
+const BotaoTeste = styled(Button)`
+	&&{
+		/* background-color: #7867BF; */
+    margin: 100px 500px;
 	padding: 30px;
-	border: 1px solid black;
+	border: 10px solid red;
 	:hover{
 		background-color: #b9a8ff;
 	}
@@ -33,7 +35,8 @@ class App extends React.Component {
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 				<Filtros />
-				<Button variant="contained" color="primary">TESTE LALALA</Button>
+				<PaginaListagem/>
+				<BotaoTeste variant="contained" color="primary">TESTE LALALA</BotaoTeste>
 			</ThemeProvider>
 		)
 	}
