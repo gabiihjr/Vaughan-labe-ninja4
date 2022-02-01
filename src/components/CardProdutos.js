@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 ///   APi  - Output  get all jobs  - for test only.
 
@@ -501,14 +502,8 @@ box-sizing: border-box;
 
 `
 
-const ButtonStyled = styled(Button)`
-  &&{
-    margin-top: 10px;
-  }
 
-`;
 
- 
 
 
 
@@ -516,22 +511,35 @@ export default class CardProdutos extends Component {
 
 
 
-  render() {
+
+  onClickToDetail =(idProduto)=> { 
+
+  }
+
+  onClickToCard =(idProduto)=>{ 
     
-      // this.data1()
+  }
+   
+
+
+  render() {
+
+    // this.data1()
 
     const productsToScreen = data.jobs.map(item =>
       <ProductContainer
         key={item.id}>
         <p>{item.title}</p>
-         {/* A data Ta errada mes a menos  */}
+        {/* A data Ta errada mes a menos  */}
         <p>Até {(new Date(item.dueDate)).toLocaleDateString()}
-        {/* <p>Até {(new Date(item.dueDate)).getDate()}/ */}
-        {/* {(new Date(item.dueDate)).getMonth()}/
-        {(new Date(item.dueDate)).getFullYear()}  */}
-        &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
-          { style: 'currency', currency: 'BRL' })}</strong></p>
-        <div> <ButtonStyled variant="text" color="primary">VER DETALHES</ButtonStyled> <img alt="cart"/>  </div>
+          &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
+            { style: 'currency', currency: 'BRL' })}</strong></p>
+        <div> <Button variant="text" color="primary" onClick={() => this.onClickToDetail('Ver Detalhes', item.id)} >
+          VER DETALHES </Button>
+          <Button onClick={() => this.onClickToCard('carrinho', item.id)}>
+            <AddShoppingCartIcon/>
+          </Button>
+        </div>
       </ProductContainer>)
 
     return (

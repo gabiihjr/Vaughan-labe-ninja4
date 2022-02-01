@@ -10,7 +10,7 @@ export default class PaginaListagem extends Component {
         <p>Página de listagem!</p>
 
         {/* retirar o true  */}
-        { true || <CardProdutos/>}
+        <CardProdutos/>
       </div>
     )
   }
