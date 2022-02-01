@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import CardProdutos from '../components/CardProdutos';
 
-export class PaginaListagem extends Component {
+
+
+export default class PaginaListagem extends Component {
   render() {
     return (
       <div>
         <p>Página de listagem!</p>
+        { true || <CardProdutos/>}
+
       </div>
     )
   }
