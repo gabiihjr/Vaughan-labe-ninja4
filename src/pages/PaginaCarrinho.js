@@ -16,14 +16,24 @@ const CarrinhoContainer = styled.div`
 `
 
 export default class PaginaCarrinho extends Component {
+  // calcularTotal = () => {
+  //   let valorTotal = 0
+  //   for (let produto of this.props.produtosNoCarrinho) {
+  //     valorTotal += produto.price
+  //   }
+  //   return valorTotal
+  // }
+
   render() {
     return (
       <CarrinhoContainer>
-        <h1>Header aqui</h1>
+        {/* <h1>Header aqui</h1>
         <button> Voltar para lista </button>
-        <CardCarrinho />
-        <h3>Total: R$ 0.00</h3> 
-        <button>Contratar serviços</button>
+        {this.props.produtosNoCarrinho.map((item) => {
+      return <CardCarrinho itemCarrinho = {item}/>
+      })}
+        <h3>Total: R$ {this.calcularTotal()}.00</h3> 
+        <button>Contratar serviços</button> */}
       </CarrinhoContainer>
     )
   }

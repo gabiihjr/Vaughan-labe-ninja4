@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: lightgray;
   padding: 20px;
   width: 60%;
@@ -20,8 +21,8 @@ export default class CardCarrinho extends Component {
   render() {
     return (
       <CardContainer>
-        <p>Produto</p>
-        <p>Valor</p>
+        {/* <p>{this.props.itemCarrinho.title}</p>
+        <p>{this.props.itemCarrinho.price}</p> */}
         <button>Excluir</button>
       </CardContainer>
     )

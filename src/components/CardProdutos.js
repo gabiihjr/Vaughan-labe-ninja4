@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import PaginaCarrinho from '../pages/PaginaCarrinho'
 
 ///   APi  - Output  get all jobs  - for test only.
 
@@ -514,6 +515,9 @@ const ButtonStyled = styled(Button)`
 
 export default class CardProdutos extends Component {
 
+  state = {
+    produtosNoCarrinho: []
+  }
 
 
   render() {
@@ -536,7 +540,9 @@ export default class CardProdutos extends Component {
 
     return (
       <Container>
+
         {productsToScreen}
+        {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
       </Container>
     )
   }
