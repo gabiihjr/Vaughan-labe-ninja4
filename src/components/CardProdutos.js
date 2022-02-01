@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 
 ///   APi  - Output  get all jobs  - for test only.
 
@@ -455,13 +456,14 @@ flex-direction: column;
 align-items: center;
 /* border: 1px solid black; */
 box-shadow: 0 0 1px 5px #f4f2fae7;
-padding:0 1rem 1rem 1rem;
+padding:1rem 1rem 1rem 1rem;
 background-color: #dad1ff;
 border-radius: 5px;
 /* max-width: 24.2%; */
 box-sizing: border-box;
 
 p:first-child { 
+  margin:1rem 1rem;
   font-size: 1.5rem;
   color:#7867BF;
 } 
@@ -470,6 +472,7 @@ p:first-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1rem;
   width: 90%;
   background-color: #dad1ff;
   padding: 0.2rem  0.25rem ;
@@ -491,15 +494,21 @@ const Container = styled.div`
 /* flex-wrap: wrap; */
 display: grid;
 grid-template-columns:repeat(4, 1fr) ;
-
-
 gap:1rem;
 width: 100%;
 padding: 0 2rem;
 box-sizing: border-box;
 
-
 `
+
+const ButtonStyled = styled(Button)`
+  &&{
+    margin-top: 10px;
+  }
+
+`;
+
+ 
 
 
 
@@ -522,7 +531,7 @@ export default class CardProdutos extends Component {
         {(new Date(item.dueDate)).getFullYear()}  */}
         &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
           { style: 'currency', currency: 'BRL' })}</strong></p>
-        <div> <button>VER DETALHES</button> <img alt="cart"/>  </div>
+        <div> <ButtonStyled variant="text" color="primary">VER DETALHES</ButtonStyled> <img alt="cart"/>  </div>
       </ProductContainer>)
 
     return (

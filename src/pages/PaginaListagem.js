@@ -8,8 +8,9 @@ export default class PaginaListagem extends Component {
     return (
       <div>
         <p>Página de listagem!</p>
-        { true || <CardProdutos/>}
 
+        {/* retirar o true  */}
+        { true || <CardProdutos/>}
       </div>
     )
   }
