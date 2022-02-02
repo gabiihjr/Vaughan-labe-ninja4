@@ -95,9 +95,6 @@ export default class CardProdutos extends Component {
 
   }
 
-
-
-
   onClickToDetail = (idProduto) => {
     console.log('Ver Detalhes', idProduto)
     this.setState({
@@ -120,6 +117,7 @@ export default class CardProdutos extends Component {
       const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
 
       const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+      alert("Serviço adicionado no carrinho!")
 
       this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
     }
@@ -131,6 +129,10 @@ export default class CardProdutos extends Component {
       return idProduto !== produto.id
     })
     this.setState ({ produtosNoCarrinho: ficaNoCarrinho})
+  }
+
+  deixarCarrinhoVazio = () => {
+    this.setState ({ produtosNoCarrinho: []})
   }
 
     
@@ -204,12 +206,12 @@ export default class CardProdutos extends Component {
         </div>
       </ProductContainer>)
 
-
-
     return (
       <div>
-
-          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+          <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}
+          removerDoCarrinho = {this.removerDoCarrinho}
+          deixarCarrinhoVazio = {this.deixarCarrinhoVazio}
+          />
         <Filtros
           servicosMapeados={this.productsToScreen}
            />

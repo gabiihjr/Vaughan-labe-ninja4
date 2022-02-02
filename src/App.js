@@ -20,10 +20,6 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 
-
-
-
-
 class App extends React.Component {
 
 
