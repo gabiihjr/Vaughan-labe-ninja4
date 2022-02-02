@@ -9,15 +9,6 @@ import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
 import Header from './components/Header';
 
-
-
-
-
-
-
-
-
-
 const GlobalStyle = createGlobalStyle`
 	* {
 		padding: 0;
