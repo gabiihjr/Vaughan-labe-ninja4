@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class PaginaCadastro extends Component {
+export default class PaginaCadastro extends Component {
   render() {
     return (
       <div>
