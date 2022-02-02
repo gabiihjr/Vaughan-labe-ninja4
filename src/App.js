@@ -7,6 +7,7 @@ import PaginaListagem from './pages/PaginaListagem';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
+// import { CardCadastro } from './components/CardCadastro';
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -26,8 +27,8 @@ const BotaoTeste = styled(Button)`
 	border: 10px solid red;
 	:hover{
 		background-color: #b9a8ff;
-	}
-`
+	}}`
+
 
 class App extends React.Component {
 	render () {
