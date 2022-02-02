@@ -1,5 +1,5 @@
 import React from 'react'
-import styled , { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
 import PaginaListagem from './pages/PaginaListagem';
@@ -7,7 +7,7 @@ import PaginaListagem from './pages/PaginaListagem';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
-// import { CardCadastro } from './components/CardCadastro';
+import Header from './components/Header';
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -27,16 +27,22 @@ const BotaoTeste = styled(Button)`
 	border: 10px solid red;
 	:hover{
 		background-color: #b9a8ff;
-	}}`
+	}
+}
+`
 
 
 class App extends React.Component {
-	render () {
+	render() {
 		return (
 			<ThemeProvider theme={theme}>
+				<Header />
+				<Button>Contratar serviço</Button>
+				<Button>Seja um ninja</Button>
+
+				
 				<GlobalStyle />
-				<Filtros />
-				<PaginaListagem/>
+			
 				<BotaoTeste variant="contained" color="primary">TESTE LALALA</BotaoTeste>
 			</ThemeProvider>
 		)
