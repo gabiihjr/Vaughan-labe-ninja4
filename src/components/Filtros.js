@@ -15,35 +15,8 @@ align-items: center;
 
 
 export class Filtros extends Component {
-   state = {
-     filtroMaximo: 0,
-     filtroMinimo: 20,
-     filtroBuscaPorNome: ""
-   }
-
-   EventoMinimo = (event) => {
-     this.setState({
-       filtroMinimo: event.target.value
-
-     })
-   }
-
-   EventoMaximo = (event) => {
-    alert("Está funcionando !")
-    this.setState({
-      filtroMaximo: event.target.value
-
-    })
-  }
-
-  EventoBuscaPornome = (event) => {
-    this.setState({
-      filtroBuscaPorNome: event.target.value
-      
-
-    })
-  }
-
+ 
+ 
   render() {
   
     
@@ -58,7 +31,7 @@ export class Filtros extends Component {
           <input 
           placeholder='Valor Mínimo'
           type = "number"
-          onChange={ this.EventoMinimo}
+          onChange={ this.props.EventoMinimo}
           />
 
       
@@ -68,7 +41,7 @@ export class Filtros extends Component {
           <input  
           placeholder='Valor Máximo'
           type = "number"
-          onChange={ this.EventoMaximo}
+          onChange={ this.props.EventoMaximo}
           />
        
 
@@ -77,12 +50,11 @@ export class Filtros extends Component {
           <input
           placeholder='Busca por título ou descrição'
           type = "text"
-          onChange={this.EventoBuscaPornome}
+          onChange={this.props.EventoBuscaPornome}
             
           />
             
-          <label>   
-
+        
             <h3>Ordenação</h3>
              <select>     
             <option value={"Crescente"}>Preço Crescente</option>
@@ -94,7 +66,7 @@ export class Filtros extends Component {
             
             </select>
 
-          </label>
+          
 
 
        
