@@ -26,7 +26,9 @@ export class CardCadastro extends Component {
   }
 
   handleInputPayment = (event) => {
-    this.setState({inputPayment: event.target.value})
+    const newPayment = [...this.state.inputPayment]
+    newPayment.push(event.target.value)
+    this.setState({inputPayment: newPayment})
   }
 
   handleInputDate = (event) => {
@@ -34,8 +36,7 @@ export class CardCadastro extends Component {
   }
 
 
-  createJob = () => {
-    console.log("entrando no função createJob") 
+  createJob = (event) => {
     const url = 'https://labeninjas.herokuapp.com/jobs'
     const body = {
       title: this.state.inputTitle,
@@ -49,10 +50,12 @@ export class CardCadastro extends Component {
     axios.post (url, body, auth)
     .then((response) => {
       console.log(response.data.message)
-      alert("Funcionou")
+      alert(response.data.message)
     })
     .catch((error) => console.log(error))
+    event.preventDefault()
   }
+
 
   render() {
     console.log(this.state)
@@ -60,17 +63,18 @@ export class CardCadastro extends Component {
       <div>
         <h2>Cadastre o seu serviço</h2>
         <form>
-          <input value={this.state.inputTitle} onChange={this.handleInputTitle} placeholder="Título *" type="text" />
-          <input value={this.state.inputDescription} onChange={this.handleInputDescription} placeholder="Descrição *" type="text"  />
-          <input value={this.state.price} onChange={this.handleInputPrice} placeholder="R$" />
-          <select value={this.state.inputPayment} onChange={this.handleInputPayment}>
+          <input required value={this.state.inputTitle} onChange={this.handleInputTitle} placeholder="Título *" type="text" />
+          <input required value={this.state.inputDescription} onChange={this.handleInputDescription} placeholder="Descrição *" type="text"  />
+          <input required value={this.state.price} onChange={this.handleInputPrice} placeholder="R$" />
+          <select required value={this.state.inputPayment} onChange={this.handleInputPayment}>
+              <option value="" selected>Selecionar...</option>
               <option value="pix">Pix</option>
               <option value="cartaocredito">Cartão de crédito</option>
               <option value="cartaodebito">Cartão de Débito</option>
               <option value="boleto">Boleto</option>
           </select>
-          <input value={this.state.inputDate} onChange={this.handleInputDate} type="date" name="dueDate" required />
-          <button type="submit" onClick={this.createJob}>Cadastrar</button>
+          <input required value={this.state.inputDate} onChange={this.handleInputDate} type="date" name="dueDate" required />
+          <button onClick={this.createJob}>Cadastrar</button>
         </form>
         
       </div>
