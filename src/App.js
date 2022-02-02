@@ -4,7 +4,7 @@ import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
 import PaginaListagem from './pages/PaginaListagem';
 import CardProdutos from './components/CardProdutos';
-// import styled from 'styled-components';
+
 import { ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
@@ -20,16 +20,8 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 
-const BotaoTeste = styled(Button)`
-		/* background-color: #7867BF; */
-    margin: 100px 500px;
-	padding: 30px;
-	border: 10px solid red;
-	:hover{
-		background-color: #b9a8ff;
-	}
-}
-`
+
+
 
 
 class App extends React.Component {
@@ -44,16 +36,20 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<ThemeProvider theme={theme}>
+			<ThemeProvider theme={theme}
+			>
+				<GlobalStyle />
 				<Header />
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
-				{/* <PaginaListagem gettingDataAPP={this.gettingDataAPP}/> */}
-                {/* <CardProdutos/> */}
+				 <PaginaListagem gettingDataAPP={this.gettingDataAPP} />
+              
 				
-				<GlobalStyle />
+				
+				
+				 
 			
-				<BotaoTeste variant="contained" color="primary">TESTE LALALA</BotaoTeste>
+			 
 			</ThemeProvider>
 		)
 	}

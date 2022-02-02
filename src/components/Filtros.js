@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+
 const Cabecalho = styled.div`
 display: flex;
 justify-content: space-between;
@@ -8,6 +9,10 @@ align-items: center;
 
 
 `
+
+
+
+
 
 export class Filtros extends Component {
    state = {
@@ -40,6 +45,12 @@ export class Filtros extends Component {
   }
 
   render() {
+  
+    
+    
+   
+
+
     return (
       <Cabecalho>
         
@@ -78,8 +89,8 @@ export class Filtros extends Component {
             <option value={"Decrescente"}>Preço Decrescente</option>
             <option value={"Decrescente"}>Titulo</option>
             <option value={"Decrescente"}>Prazo</option>
-
-
+              
+           
             
             </select>
 

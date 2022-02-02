@@ -18,7 +18,7 @@ export default class PaginaListagem extends Component {
 
     return (
       <div>
-        <p>Página de listagem!</p>
+        
 
         {/* retirar o true  */}
         <CardProdutos 

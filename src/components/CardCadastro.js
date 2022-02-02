@@ -26,16 +26,16 @@ export class CardCadastro extends Component {
   }
 
   handleInputPayment = (event) => {
-    const newPayment = [...this.state.inputPayment]
-    newPayment.push(event.target.value)
-    this.setState({inputPayment: newPayment})
+    this.setState({inputPayment: event.target.value})
   }
 
   handleInputDate = (event) => {
     this.setState({inputDate: event.target.value})
   }
 
+
   createJob = () => {
+    console.log("entrando no função createJob") 
     const url = 'https://labeninjas.herokuapp.com/jobs'
     const body = {
       title: this.state.inputTitle,
@@ -44,16 +44,18 @@ export class CardCadastro extends Component {
       paymentMethods: this.state.inputPayment,
       dueDate: this.state.inputDate
     }
+    console.log(body)
     const auth = { headers: { Authorization: key } }
     axios.post (url, body, auth)
     .then((response) => {
-      console.log(response.data)
+      console.log(response.data.message)
       alert("Funcionou")
     })
     .catch((error) => console.log(error))
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         <h2>Cadastre o seu serviço</h2>
@@ -68,7 +70,7 @@ export class CardCadastro extends Component {
               <option value="boleto">Boleto</option>
           </select>
           <input value={this.state.inputDate} onChange={this.handleInputDate} type="date" name="dueDate" required />
-          <button onClick={this.createJob}>Cadastrar</button>
+          <button type="submit" onClick={this.createJob}>Cadastrar</button>
         </form>
         
       </div>
