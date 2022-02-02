@@ -4,7 +4,7 @@ import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
 import PaginaListagem from './pages/PaginaListagem';
 import CardProdutos from './components/CardProdutos';
-
+import CardCadastro from './components/CardCadastro'
 import { ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
@@ -38,7 +38,7 @@ class App extends React.Component {
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
 				 <PaginaListagem gettingDataAPP={this.gettingDataAPP} />
-              
+				<CardCadastro/>
 			</ThemeProvider>
 		)
 	}
