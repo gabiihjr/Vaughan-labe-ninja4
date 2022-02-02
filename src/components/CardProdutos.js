@@ -9,10 +9,6 @@ import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
 
 
-///   APi  - Output  get all jobs  - for test only.
-
-
-
 
 
 const ProductContainer = styled.div`

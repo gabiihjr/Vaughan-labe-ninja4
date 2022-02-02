@@ -34,6 +34,8 @@ const BotaoTeste = styled(Button)`
 
 class App extends React.Component {
 
+
+     //! Data que vem  Api getAllJobs la do cardproduto. 
      gettingDataAPP = (dataJobs) => { 
 		 console.log('gettingDataAPP',dataJobs)
 
@@ -47,7 +49,7 @@ class App extends React.Component {
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
 				{/* <PaginaListagem gettingDataAPP={this.gettingDataAPP}/> */}
-
+                {/* <CardProdutos/> */}
 				
 				<GlobalStyle />
 			
