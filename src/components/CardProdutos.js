@@ -183,6 +183,7 @@ export default class CardProdutos extends Component {
           <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}
           removerDoCarrinho = {this.removerDoCarrinho}
           deixarCarrinhoVazio = {this.deixarCarrinhoVazio}
+          getAllJobs = {this.getAllJobs}
           />
         <Filtros
           servicosMapeados={this.productsToScreen}
