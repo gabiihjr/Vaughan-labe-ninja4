@@ -119,6 +119,38 @@ export default class CardProdutos extends Component {
 
   }
 
+    
+  onClickToReturn = ( )=> { 
+    this.setState({
+      toDetalhes: true,
+    })
+
+  }
+
+
+  EventoMinimo = (event) => {
+    this.setState({
+      filtroMinimo: event.target.value
+
+    })
+  }
+
+  EventoMaximo = (event) => {
+   this.setState({
+     filtroMaximo: event.target.value
+
+   })
+ }
+
+ EventoBuscaPornome = (event) => {
+   this.setState({
+     filtroBuscaPorNome: event.target.value
+     
+
+   })
+ }
+
+
 
   render() {
 
@@ -132,7 +164,7 @@ export default class CardProdutos extends Component {
       }
     }).filter(servico => {
       if (this.state.filtroMaximo) {
-        return servico.price >= this.state.filtroMaximo
+        return servico.price <= this.state.filtroMaximo
       } else {
 
         return servico
@@ -164,18 +196,23 @@ export default class CardProdutos extends Component {
     return (
       <div>
 
-        <Filtros
-          servicosMapeados={this.productsToScreen}
-           />
+         {this.state.toDetalhes && 
+         <Filtros servicosMapeados={this.productsToScreen}
+         EventoBuscaPornome = {this.EventoBuscaPornome }
+         EventoMinimo ={this.EventoMinimo}
+         EventoMaximo ={this.EventoMaximo}
+         
+         />}
+
 
         <Container>
-
-          {productsToScreen}
           {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
 
-
-
-          {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
+          {this.state.toDetalhes ? productsToScreen : 
+          <PaginaDetalhes  
+          idJob={this.state.idJob} 
+          onClickToReturn={this.onClickToReturn}
+          />}
 
         </Container>
       </div>
