@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import PaginaCarrinho from '../pages/PaginaCarrinho'
 
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
@@ -93,6 +94,9 @@ export default class CardProdutos extends Component {
 
   }
 
+  state = {
+    produtosNoCarrinho: []
+  }
 
   onClickToDetail = (idProduto) => {
     console.log('Ver Detalhes', idProduto)
@@ -138,7 +142,12 @@ export default class CardProdutos extends Component {
 
     return (
       <Container>
+
+        {productsToScreen}
+        {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+
         {this.state.toDetalhes ? productsToScreen :<PaginaDetalhes idJob ={this.state.idJob}/>}
+
       </Container>
     )
   }

@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
 import PaginaListagem from './pages/PaginaListagem';
+import CardProdutos from './components/CardProdutos';
 // import styled from 'styled-components';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -20,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const BotaoTeste = styled(Button)`
-	&&{
 		/* background-color: #7867BF; */
     margin: 100px 500px;
 	padding: 30px;
