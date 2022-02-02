@@ -33,9 +33,10 @@ export default class PaginaCarrinho extends Component {
         <h1>Header aqui</h1>
         <button> Voltar para lista </button>
         {this.props.produtosNoCarrinho.map((item) => {
-      return <CardCarrinho itemCarrinho = {item}/>
-      })}
-        <h3>Total: R$ {this.calcularTotal()}.00</h3> 
+          return <CardCarrinho itemCarrinho={item}
+            removerDoCarrinho={this.props.removerDoCarrinho} />
+        })}
+        <h3>Total: R$ {this.calcularTotal()}.00</h3>
         <button>Contratar serviços</button>
       </CarrinhoContainer>
     )

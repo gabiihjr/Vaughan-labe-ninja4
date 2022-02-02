@@ -180,7 +180,8 @@ export default class CardProdutos extends Component {
 
     return (
       <div>
-          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}
+          removerDoCarrinho = {this.removerDoCarrinho}/> */}
         <Filtros
           servicosMapeados={this.productsToScreen}
            />

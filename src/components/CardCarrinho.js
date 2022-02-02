@@ -23,7 +23,7 @@ export default class CardCarrinho extends Component {
       <CardContainer>
         <p>{this.props.itemCarrinho.title}</p>
         <p>R${this.props.itemCarrinho.price},00</p>
-        <button>Excluir</button>
+        <button onClick={() => this.props.removerDoCarrinho(this.props.itemCarrinho.id)}>Excluir</button>
       </CardContainer>
     )
   }
