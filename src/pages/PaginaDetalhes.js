@@ -17,11 +17,28 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+
+p:first-child{ 
+  font-size: 2rem; 
+}
+
 p { 
   margin: 10px;
 }
 `
 
+const ButtonAdd = styled(Button)`
+ &&{ 
+   width: 100%;
+ }
+
+`
+const ButtonVoltar = styled(Button)`
+ &&{ 
+   width: 100%;
+ }
+
+`
 
 
 export default class PaginaDetalhes extends Component {
@@ -63,7 +80,6 @@ export default class PaginaDetalhes extends Component {
   render() {
 
 
-  
     return (
       <PaginaDetalhesDiv>
         <p>{this.state.job.title}</p>
@@ -78,11 +94,11 @@ export default class PaginaDetalhes extends Component {
        { this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..." }
         <p>{this.state.job.description}</p>
        
-        <Button size="large" variant="contained" color="primary" 
+        <ButtonAdd size="large" variant="contained" color="primary" 
         onClick={() => this.onClickAdd('Ver Detalhes',)}
-        >ADD</Button>
-        <Button size="large" variant="contained" color="secondary" 
-        onClick={this.props.onClickToReturn}>Volta</Button>
+        >ADD</ButtonAdd>
+        <ButtonVoltar size="large" variant="contained" color="secondary" 
+        onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>
       </PaginaDetalhesDiv>
     )
   }

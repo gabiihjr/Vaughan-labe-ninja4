@@ -43,11 +43,7 @@ class App extends React.Component {
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
 				 <PaginaListagem gettingDataAPP={this.gettingDataAPP} />
-              
-				
-				
-				
-				 
+              	 
 			
 			 
 			</ThemeProvider>

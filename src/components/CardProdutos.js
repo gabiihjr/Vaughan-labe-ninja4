@@ -151,7 +151,6 @@ export default class CardProdutos extends Component {
  }
 
 
-
   render() {
 
 
@@ -190,8 +189,6 @@ export default class CardProdutos extends Component {
           </Button>
         </div>
       </ProductContainer>)
-
-
 
     return (
       <div>
