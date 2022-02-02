@@ -10,10 +10,6 @@ import PaginaDetalhes from '../pages/PaginaDetalhes';
 import { Filtros } from './Filtros';
 
 
-///   APi  - Output  get all jobs  - for test only.
-
-
-
 
 
 const ProductContainer = styled.div`
@@ -139,6 +135,38 @@ export default class CardProdutos extends Component {
     this.setState ({ produtosNoCarrinho: []})
   }
 
+    
+  onClickToReturn = ( )=> { 
+    this.setState({
+      toDetalhes: true,
+    })
+
+  }
+
+
+  EventoMinimo = (event) => {
+    this.setState({
+      filtroMinimo: event.target.value
+
+    })
+  }
+
+  EventoMaximo = (event) => {
+   this.setState({
+     filtroMaximo: event.target.value
+
+   })
+ }
+
+ EventoBuscaPornome = (event) => {
+   this.setState({
+     filtroBuscaPorNome: event.target.value
+     
+
+   })
+ }
+
+
   render() {
 
 
@@ -151,7 +179,7 @@ export default class CardProdutos extends Component {
       }
     }).filter(servico => {
       if (this.state.filtroMaximo) {
-        return servico.price >= this.state.filtroMaximo
+        return servico.price <= this.state.filtroMaximo
       } else {
 
         return servico
@@ -183,17 +211,30 @@ export default class CardProdutos extends Component {
           <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}
           removerDoCarrinho = {this.removerDoCarrinho}
           deixarCarrinhoVazio = {this.deixarCarrinhoVazio}
-          getAllJobs = {this.getAllJobs}
           />
         <Filtros
           servicosMapeados={this.productsToScreen}
            />
 
-        <Container>
+         {this.state.toDetalhes && 
+         <Filtros servicosMapeados={this.productsToScreen}
+         EventoBuscaPornome = {this.EventoBuscaPornome }
+         EventoMinimo ={this.EventoMinimo}
+         EventoMaximo ={this.EventoMaximo}
+         
+         />}
 
-          {productsToScreen}
+
+
 
           {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
+        <Container>
+
+          {this.state.toDetalhes ? productsToScreen : 
+          <PaginaDetalhes  
+          idJob={this.state.idJob} 
+          onClickToReturn={this.onClickToReturn}
+          />}
 
         </Container>
       </div>

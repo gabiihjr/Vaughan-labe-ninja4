@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; 
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import Button  from '@material-ui/core/Button';
 
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import Axios from 'axios';
@@ -59,10 +59,6 @@ export default class PaginaDetalhes extends Component {
 
   }
   
-  onClickToReturn = ( )=> { 
-    console.log("Return clicado")
-
-  }
 
   render() {
 
@@ -79,14 +75,14 @@ export default class PaginaDetalhes extends Component {
             { style: 'currency', currency: 'BRL' })  
         
         }</p>
-       { this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p>: 'Carregando...'}
+       { this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..." }
         <p>{this.state.job.description}</p>
        
         <Button size="large" variant="contained" color="primary" 
         onClick={() => this.onClickAdd('Ver Detalhes',)}
         >ADD</Button>
         <Button size="large" variant="contained" color="secondary" 
-        onClick={() => this.onClickToReturn('Ver Detalhes',)}>Volta</Button>
+        onClick={this.props.onClickToReturn}>Volta</Button>
       </PaginaDetalhesDiv>
     )
   }
