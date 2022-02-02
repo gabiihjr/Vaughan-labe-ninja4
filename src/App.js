@@ -26,6 +26,8 @@ const GlobalStyle = createGlobalStyle`
 
 class App extends React.Component {
 
+
+     //! Data que vem  Api getAllJobs la do cardproduto. 
      gettingDataAPP = (dataJobs) => { 
 		 console.log('gettingDataAPP',dataJobs)
 
