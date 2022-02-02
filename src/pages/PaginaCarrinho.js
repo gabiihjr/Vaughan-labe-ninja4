@@ -20,14 +20,16 @@ const CarrinhoContainer = styled.div`
 
 export default class PaginaCarrinho extends Component {
 
-  // componentDidUpdate() {
-  //   const itensCarrinhoEmString = JSON.stringify(this.props.produtosNoCarrinho)
-  //   localStorage.setItem("Itens no Carrinho", itensCarrinhoEmString);
-  // };
+  state = {
+    carrinhoLocal: []
+  }
 
-  // componentDidMount () {
-  //   const carrinhoLocalStorage = JSON.parse(localStorage.getItem("Itens no Carrinho"))
-  // }
+  componentDidMount() {
+    // const carrinhoLocalStorage = JSON.parse(localStorage.getItem("Itens no Carrinho"))
+    // const newCarrinho = 
+    // console.log(carrinhoLocalStorage)
+    this.setState({ carrinhoLocal: this.props.produtosNoCarrinho })
+  }
 
   calcularTotal = () => {
     let valorTotal = 0
@@ -43,6 +45,7 @@ export default class PaginaCarrinho extends Component {
   }
 
   render() {
+    console.log("Carrinho local:" + this.props.produtosNoCarrinho)
     return (
       <CarrinhoContainer>
         <h1>Carrinho</h1>

@@ -108,20 +108,20 @@ export default class CardProdutos extends Component {
 
   }
 
-  onClickToCard = (idProduto) => {
-    console.log('Carrinho', idProduto)
-    const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
-    if (produtoNoCarrinho) {
-      return alert("Esse produto já foi adicionado ao carrinho!")
-    } else {
-      const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
+  // onClickToCard = (idProduto) => {
+  //   console.log('Carrinho', idProduto)
+  //   const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
+  //   if (produtoNoCarrinho) {
+  //     return alert("Esse produto já foi adicionado ao carrinho!")
+  //   } else {
+  //     const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
 
-      const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
-      alert("Serviço adicionado no carrinho!")
+  //     const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+  //     alert("Serviço adicionado no carrinho!")
 
-      this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
-    }
-  }
+  //     this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
+  //   }
+  // }
 
   removerDoCarrinho = (idProduto) => {
     const copiaCarrinho = [...this.state.produtosNoCarrinho]
@@ -133,6 +133,10 @@ export default class CardProdutos extends Component {
 
   deixarCarrinhoVazio = () => {
     this.setState ({ produtosNoCarrinho: []})
+  }
+
+  pegarIdProduto = (idProduto) => {
+    this.setState ({ produtosNoCarrinho: idProduto})
   }
 
     
@@ -165,7 +169,6 @@ export default class CardProdutos extends Component {
 
    })
  }
-
 
   render() {
 
@@ -227,6 +230,10 @@ export default class CardProdutos extends Component {
           <PaginaDetalhes  
           idJob={this.state.idJob} 
           onClickToReturn={this.onClickToReturn}
+          produtosNoCarrinho = {this.state.produtosNoCarrinho}
+          jobs = {this.state.jobs}
+          pegarIdProduto = {this.pegarIdProduto}
+          onClickToCard = {this.onClickToCard}
           />}
 
         </Container>
