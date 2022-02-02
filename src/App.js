@@ -21,24 +21,66 @@ const GlobalStyle = createGlobalStyle`
 `
 
 class App extends React.Component {
+	state = {
+		paginaAtual: "home",
+		produtosNoCarrinho: []
+	}
 
+	mudarParaHome = () => {
+		this.setState({ paginaAtual: "home" })
+	}
 
-     //! Data que vem  Api getAllJobs la do cardproduto. 
-     gettingDataAPP = (dataJobs) => { 
-		 console.log('gettingDataAPP',dataJobs)
+	mudarParaCarrinho = () => {
+		this.setState({ paginaAtual: "carrinho" })
+	}
 
-	 }
+	onClickToCard = (idProduto) => {
+		console.log('Carrinho', idProduto)
+		const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
+		if (produtoNoCarrinho) {
+		  return alert("Esse produto já foi adicionado ao carrinho!")
+		} else {
+		  const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
+	
+		  const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+		  alert("Serviço adicionado no carrinho!")
+	
+		  this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
+		}
+	  }
+
+	//! Data que vem  Api getAllJobs la do cardproduto. 
+	gettingDataAPP = (dataJobs) => {
+		console.log('gettingDataAPP', dataJobs)
+
+	}
+
+	mudarPagina = () => {
+		switch (this.state.paginaAtual) {
+			case "home":
+				return <CardProdutos />
+			case "carrinho":
+				return <PaginaCarrinho produtosNoCarrinho={this.state.produtosNoCarrinho}
+				onClickToCard ={this.onClickToCard}/>
+			default:
+				return <CardProdutos />
+		}
+	}
 
 
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-				<Header />
+				<Header mudarParaCarrinho={this.mudarParaCarrinho}
+					mudarParaHome={this.mudarParaHome} />
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
-				 <PaginaListagem gettingDataAPP={this.gettingDataAPP} />
+
 				<CardCadastro/>
+				{/* <PaginaListagem gettingDataAPP={this.gettingDataAPP} /> */}
+				{this.mudarPagina()}
+
 			</ThemeProvider>
 		)
 	}
