@@ -1,167 +1,77 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import axios from 'axios'
+import { key } from '../constants/labeninjasAPI'
 
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 35%;
-  max-height: 100vh;
-  transform: translateX(-50%);
-  position: relative;
-  margin-left: 50%;
-  margin-top: 100px;
-  align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-`
-
-const TituloRoxo = styled.h2`
-  color: #7867BF;
-  font-size: 2rem;
-`
-const Form = styled.form`
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1rem;
-`
-
-const InputA = styled.input`
-  border: solid 1px #7867BF;
-  display: block;
-  justify-self: center;
-  margin: 2% 0;
-  width: 101%;
-  padding: 0.5em 0  0.5em 0.75em;
-  font-size: 1rem;
-  border-radius: 5px;
-`
-const InputB = styled.input`
-  border: none;
-  width: 95%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1rem;
-`
-
-const FieldsetPagamento = styled.fieldset`
-  border: solid 1px #7867BF;
-  legend {
-    font-size: 1rem;
-  }
-  margin-bottom: 2%;
-  width: 98%;
-  font-size: 1.1rem;
-  display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
-  grid-row-gap: 3%;
-  border-radius: 5px;
-
-`
-const Checkbox = styled.input`
-  margin-right: 7px;
-  border: 1px solid #7867BF;
-  width: 15px;
-  height: 20px;
-
-  :hover {
-    cursor: pointer;
-    border: solid 2px #7867BF;
-  }
-  /* TENTATIVA DE MUDAR A COR DO CHECKBOX
-  :after {
-    content: " ";
-    background-color: #7867BF;
-    display: inline-block;
-    visibility: visible;
-  }
-  :checked:after {
-    content: "\2714";
-    box-shadow: 0px 2px 4px rgba(155, 155, 155, 0.15);
-    border-radius: 3px;
-    height: 12px;
-    display: block;
-    width: 12px;
-    text-align: center;
-    font-size: 9px;
-    color: white;
-  } */
-`
-
-const Fieldset = styled.fieldset`
-  border: solid 1px #7867BF;
-  legend {
-    font-size: 1rem;
-  }
-  margin-bottom: 2%;
-  width: 98%;
-  font-size: 1.1rem;
-  border-radius: 5px;
-`
-
-const BotaoCadastrar = styled.button`
-  width: 496px;
-  margin-top: 2%;
-  height: 2rem;
-  font-size: 1.4rem;
-  background-color: #7867BF;
-  border: 1.5px #483d72 outset;
-  color: #F4F4FC;
-  border-radius: 5px;
-  :hover {
-      /* background-color: #483d72; */
-      filter: brightness(90%);
-      cursor: pointer;
-  }
-`
 
 export class CardCadastro extends Component {
+  state = {
+      inputTitle: "",
+      inputDescription: "",
+      inputPrice: "",
+      inputPayment: [],
+      inputDate: ""
+     }
+
+
+  handleInputTitle = (event) => {
+    this.setState({inputTitle: event.target.value})
+  }
+
+  handleInputDescription = (event) => {
+    this.setState({inputDescription: event.target.value})
+  }
+
+  handleInputPrice = (event) => {
+    this.setState({inputPrice: event.target.value})
+  }
+
+  handleInputPayment = (event) => {
+    const newPayment = [...this.state.inputPayment]
+    newPayment.push(event.target.value)
+    this.setState({inputPayment: newPayment})
+  }
+
+  handleInputDate = (event) => {
+    this.setState({inputDate: event.target.value})
+  }
+
+  createJob = () => {
+    const url = 'https://labeninjas.herokuapp.com/jobs'
+    const body = {
+      title: this.state.inputTitle,
+      description: this.state.inputDescription,
+      price: Number(this.state.inputPrice),
+      paymentMethods: this.state.inputPayment,
+      dueDate: this.state.inputDate
+    }
+    const auth = { headers: { Authorization: key } }
+    axios.post (url, body, auth)
+    .then((response) => {
+      console.log(response.data)
+      alert("Funcionou")
+    })
+    .catch((error) => console.log(error))
+  }
+
   render() {
     return (
-      <Container>
-        <TituloRoxo>Cadastre o seu serviço</TituloRoxo>
-        <Form>
-          <InputA placeholder="Título *" type="text" name="title" required />
-
-          <InputA placeholder="Descrição *" type="text" name="description" required />
-
-          <Fieldset>
-            <legend>Preço *</legend>
-            <InputB placeholder="R$" type="number" name="price" required />
-          </Fieldset>
-
-          <FieldsetPagamento>
-            <legend>Formas de pagamento</legend>
-            <div>
-              <Checkbox type="checkbox" id="cartaocredito" />
-              <label for="cartaocredito">Cartão de Crédito</label>
-            </div>
-
-            <div>
-              <Checkbox type="checkbox" id="cartaodebito" />
-              <label for="cartaodebito">Cartão de Débito</label>
-            </div>
-
-            <div>
-              <Checkbox type="checkbox" id="pix" />
-              <label for="pix">Pix</label>
-            </div>
-
-            <div>
-              <Checkbox type="checkbox" id="boleto" />
-              <label for="boleto">Boleto</label>
-            </div>
-          </FieldsetPagamento>
-
-          <Fieldset>
-            <legend>Prazo *</legend>
-            <InputB type="date" name="price" required />
-          </Fieldset>
-
-          <BotaoCadastrar>Cadastrar</BotaoCadastrar>
-        </Form>
-      </Container>
+      <div>
+        <h2>Cadastre o seu serviço</h2>
+        <form>
+          <input value={this.state.inputTitle} onChange={this.handleInputTitle} placeholder="Título *" type="text" />
+          <input value={this.state.inputDescription} onChange={this.handleInputDescription} placeholder="Descrição *" type="text"  />
+          <input value={this.state.price} onChange={this.handleInputPrice} placeholder="R$" />
+          <select value={this.state.inputPayment} onChange={this.handleInputPayment}>
+              <option value="pix">Pix</option>
+              <option value="cartaocredito">Cartão de crédito</option>
+              <option value="cartaodebito">Cartão de Débito</option>
+              <option value="boleto">Boleto</option>
+          </select>
+          <input value={this.state.inputDate} onChange={this.handleInputDate} type="date" name="dueDate" required />
+          <button onClick={this.createJob}>Cadastrar</button>
+        </form>
+        
+      </div>
     )
   }
 }
