@@ -33,12 +33,20 @@ const BotaoTeste = styled(Button)`
 
 
 class App extends React.Component {
+
+     gettingDataAPP = (dataJobs) => { 
+		 console.log('gettingDataAPP',dataJobs)
+
+	 }
+
+
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
 				<Header />
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
+				{/* <PaginaListagem gettingDataAPP={this.gettingDataAPP}/> */}
 
 				
 				<GlobalStyle />
