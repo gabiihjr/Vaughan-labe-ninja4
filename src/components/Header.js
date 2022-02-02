@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from '@material-ui/core/Button';
+import App from '../App';
 
 
 export const Cabeçario = styled.header`
@@ -13,8 +14,8 @@ border: solid 1px black;
 `
 
 
-export default class Header extends React.Component {
 
+export default class Header extends React.Component {
     render() {
         return (
             <div>

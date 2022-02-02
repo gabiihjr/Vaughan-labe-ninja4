@@ -16,8 +16,6 @@ const CarrinhoContainer = styled.div`
   }
 `
 
-
-
 export default class PaginaCarrinho extends Component {
   calcularTotal = () => {
     let valorTotal = 0
@@ -25,6 +23,11 @@ export default class PaginaCarrinho extends Component {
       valorTotal += produto.price
     }
     return valorTotal
+  }
+
+  alertaDeCompra = () => {
+    alert(`Os serviços foram contratados com sucesso!`)
+    return this.props.deixarCarrinhoVazio()
   }
 
   render() {
@@ -37,7 +40,7 @@ export default class PaginaCarrinho extends Component {
             removerDoCarrinho={this.props.removerDoCarrinho} />
         })}
         <h3>Total: R$ {this.calcularTotal()}.00</h3>
-        <button>Contratar serviços</button>
+        <button onClick={this.alertaDeCompra}>Contratar serviços</button>
       </CarrinhoContainer>
     )
   }
