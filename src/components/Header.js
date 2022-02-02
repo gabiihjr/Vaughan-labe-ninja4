@@ -14,9 +14,7 @@ border: solid 1px black;
 
 
 
-
 export default class Header extends React.Component {
-
     render() {
         return (
             <div>

@@ -20,10 +20,6 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 
-
-
-
-
 class App extends React.Component {
 
 
@@ -36,16 +32,13 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<ThemeProvider theme={theme}
-			>
+			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 				<Header />
 				<Button>Contratar serviço</Button>
 				<Button>Seja um ninja</Button>
 				 <PaginaListagem gettingDataAPP={this.gettingDataAPP} />
-              	 
-			
-			 
+              
 			</ThemeProvider>
 		)
 	}

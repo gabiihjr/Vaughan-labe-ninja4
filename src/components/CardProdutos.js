@@ -95,9 +95,6 @@ export default class CardProdutos extends Component {
 
   }
 
-
-
-
   onClickToDetail = (idProduto) => {
     console.log('Ver Detalhes', idProduto)
     this.setState({
@@ -113,10 +110,29 @@ export default class CardProdutos extends Component {
 
   onClickToCard = (idProduto) => {
     console.log('Carrinho', idProduto)
-    this.setState({
+    const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
+    if (produtoNoCarrinho) {
+      return alert("Esse produto já foi adicionado ao carrinho!")
+    } else {
+      const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
 
+      const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+      alert("Serviço adicionado no carrinho!")
+
+      this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
+    }
+  }
+
+  removerDoCarrinho = (idProduto) => {
+    const copiaCarrinho = [...this.state.produtosNoCarrinho]
+    const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
+      return idProduto !== produto.id
     })
+    this.setState ({ produtosNoCarrinho: ficaNoCarrinho})
+  }
 
+  deixarCarrinhoVazio = () => {
+    this.setState ({ produtosNoCarrinho: []})
   }
 
     
@@ -192,6 +208,13 @@ export default class CardProdutos extends Component {
 
     return (
       <div>
+          <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}
+          removerDoCarrinho = {this.removerDoCarrinho}
+          deixarCarrinhoVazio = {this.deixarCarrinhoVazio}
+          />
+        <Filtros
+          servicosMapeados={this.productsToScreen}
+           />
 
          {this.state.toDetalhes && 
          <Filtros servicosMapeados={this.productsToScreen}
@@ -202,8 +225,10 @@ export default class CardProdutos extends Component {
          />}
 
 
+
+
+          {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
         <Container>
-          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
 
           {this.state.toDetalhes ? productsToScreen : 
           <PaginaDetalhes  
