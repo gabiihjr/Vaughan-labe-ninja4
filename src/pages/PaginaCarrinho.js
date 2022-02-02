@@ -45,7 +45,7 @@ export default class PaginaCarrinho extends Component {
   render() {
     return (
       <CarrinhoContainer>
-        <h1>Carrinho</h1>
+        <h1>Carrinho!</h1>
         <button> Voltar para lista </button>
         {this.props.produtosNoCarrinho.map((item) => {
           return <CardCarrinho itemCarrinho={item}
