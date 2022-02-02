@@ -21,8 +21,8 @@ export default class CardCarrinho extends Component {
   render() {
     return (
       <CardContainer>
-        {/* <p>{this.props.itemCarrinho.title}</p>
-        <p>{this.props.itemCarrinho.price}</p> */}
+        <p>{this.props.itemCarrinho.title}</p>
+        <p>R${this.props.itemCarrinho.price},00</p>
         <button>Excluir</button>
       </CardContainer>
     )

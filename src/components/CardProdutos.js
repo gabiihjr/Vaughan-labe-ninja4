@@ -113,10 +113,24 @@ export default class CardProdutos extends Component {
 
   onClickToCard = (idProduto) => {
     console.log('Carrinho', idProduto)
-    this.setState({
+    const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
+    if (produtoNoCarrinho) {
+      return alert("Esse produto já foi adicionado ao carrinho!")
+    } else {
+      const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
 
+      const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+
+      this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
+    }
+  }
+
+  removerDoCarrinho = (idProduto) => {
+    const copiaCarrinho = [...this.state.produtosNoCarrinho]
+    const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
+      return idProduto !== produto.id
     })
-
+    this.setState ({ produtosNoCarrinho: ficaNoCarrinho})
   }
 
     
@@ -149,7 +163,6 @@ export default class CardProdutos extends Component {
 
    })
  }
-
 
 
   render() {
@@ -196,6 +209,11 @@ export default class CardProdutos extends Component {
     return (
       <div>
 
+          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+        <Filtros
+          servicosMapeados={this.productsToScreen}
+           />
+
          {this.state.toDetalhes && 
          <Filtros servicosMapeados={this.productsToScreen}
          EventoBuscaPornome = {this.EventoBuscaPornome }
@@ -205,8 +223,10 @@ export default class CardProdutos extends Component {
          />}
 
 
+
+
+          {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
         <Container>
-          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
 
           {this.state.toDetalhes ? productsToScreen : 
           <PaginaDetalhes  
