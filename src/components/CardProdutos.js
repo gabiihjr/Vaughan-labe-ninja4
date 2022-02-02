@@ -7,6 +7,7 @@ import PaginaCarrinho from '../pages/PaginaCarrinho'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
+import { Filtros } from './Filtros';
 
 
 ///   APi  - Output  get all jobs  - for test only.
@@ -67,7 +68,11 @@ export default class CardProdutos extends Component {
   state = {
     jobs: [],
     toDetalhes: true,
-    idJob:'',
+    idJob: '',
+    produtosNoCarrinho: [],
+    filtroMaximo: 0,
+    filtroMinimo: 20,
+    filtroBuscaPorNome: ""
   }
 
   data = [];
@@ -94,17 +99,16 @@ export default class CardProdutos extends Component {
 
   }
 
-  state = {
-    produtosNoCarrinho: []
-  }
+
+
 
   onClickToDetail = (idProduto) => {
     console.log('Ver Detalhes', idProduto)
-    this.setState ({
+    this.setState({
       idJob: idProduto,
       toDetalhes: false,
 
-    }) 
+    })
 
     // Clicando Abre Pagina Detalhes
 
@@ -114,7 +118,7 @@ export default class CardProdutos extends Component {
   onClickToCard = (idProduto) => {
     console.log('Carrinho', idProduto)
     this.setState({
-     
+
     })
 
   }
@@ -123,7 +127,26 @@ export default class CardProdutos extends Component {
   render() {
 
 
-    const productsToScreen = this.state.jobs.map(item =>
+    const productsToScreen = this.state.jobs.filter(servico => {
+      if (this.state.filtroMinimo) {
+        return servico.price >= this.state.filtroMinimo
+      }
+      else {
+        return servico
+      }
+    }).filter(servico => {
+      if (this.state.filtroMaximo) {
+        return servico.price >= this.state.filtroMaximo
+      } else {
+
+        return servico
+
+      }
+    }).filter((servico => {
+      return servico.title.includes(this.state.filtroBuscaPorNome);
+    })
+
+    ).map(item =>
       <ProductContainer
         key={item.id}>
         <p>{item.title}</p>
@@ -132,23 +155,34 @@ export default class CardProdutos extends Component {
           &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
             { style: 'currency', currency: 'BRL' })}</strong></p>
         <div> <Button variant="text" color="primary"
-          onClick={() => this.onClickToDetail( item.id)} >
+          onClick={() => this.onClickToDetail(item.id)} >
           VER DETALHES </Button>
-          <Button onClick={() => this.onClickToCard( item.id)}>
+          <Button onClick={() => this.onClickToCard(item.id)}>
             <AddShoppingCartIcon />
           </Button>
         </div>
       </ProductContainer>)
 
+
+
     return (
-      <Container>
+      <div>
 
-        {productsToScreen}
-        {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+        <Filtros
+          servicosMapeados={this.productsToScreen}
+           />
 
-        {this.state.toDetalhes ? productsToScreen :<PaginaDetalhes idJob ={this.state.idJob}/>}
+        <Container>
 
-      </Container>
+          {productsToScreen}
+          {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+
+
+
+          {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
+
+        </Container>
+      </div>
     )
   }
 }
