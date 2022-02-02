@@ -22,8 +22,6 @@ p {
 }
 `
 
-
-
 export default class PaginaDetalhes extends Component {
 
   state ={ 
@@ -31,6 +29,7 @@ export default class PaginaDetalhes extends Component {
     paymentMethods: [],
     dueDate:'',
     price:'',
+    produtosNoCarrinho: [],
   }
 
   componentDidMount() { 
@@ -53,19 +52,12 @@ export default class PaginaDetalhes extends Component {
       })
       .catch(err => console.log(err))
   }
-
-  onClickAdd =()=> { 
-   console.log("Add clicado")
-
-  }
   
-
   render() {
 
-
-  
     return (
       <PaginaDetalhesDiv>
+
         <p>{this.state.job.title}</p>
         {/* <p>{this.state.job.paymentMethods.map(item => <>item</>)}</p> */}
        
@@ -79,7 +71,7 @@ export default class PaginaDetalhes extends Component {
         <p>{this.state.job.description}</p>
        
         <Button size="large" variant="contained" color="primary" 
-        onClick={() => this.onClickAdd('Ver Detalhes',)}
+        onClick={() => this.props.onClickToCard(this.props.idJob)}
         >ADD</Button>
         <Button size="large" variant="contained" color="secondary" 
         onClick={this.props.onClickToReturn}>Volta</Button>
