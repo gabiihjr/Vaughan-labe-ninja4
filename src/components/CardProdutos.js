@@ -7,6 +7,8 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
 import { Filtros } from './Filtros';
+import { TextField } from '@material-ui/core';
+
 
 const Cabecalho = styled.div`
 display: flex;
@@ -208,7 +210,7 @@ export default class CardProdutos extends Component {
     return (
       <div>
 
-<Cabecalho>
+<TextField>
         
         <h3>Valor Mínimo</h3>
         <input 
@@ -241,7 +243,7 @@ export default class CardProdutos extends Component {
           <option value={"Titulo"}>Titulo</option>
           <option value={"Prazo"}>Prazo</option>
           </select>
-    </Cabecalho>
+    </TextField>
         {/* {this.state.toDetalhes &&
           <Filtros servicosMapeados={this.productsToScreen}
             EventoBuscaPornome={this.EventoBuscaPornome}
