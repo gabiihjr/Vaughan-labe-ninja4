@@ -20,11 +20,13 @@ const CardContainer = styled.div`
 export default class CardCarrinho extends Component {
   render() {
     return (
-      <CardContainer>
+      <div>
+        <CardContainer>
         <p>{this.props.itemCarrinho.title}</p>
         <p>R${this.props.itemCarrinho.price},00</p>
         <button onClick={() => this.props.removerDoCarrinho(this.props.itemCarrinho.id)}>Excluir</button>
       </CardContainer>
+      </div>
     )
   }
 }

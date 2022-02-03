@@ -1,13 +1,11 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
-import PaginaListagem from './pages/PaginaListagem';
-import CardProdutos from './components/CardProdutos';
-import CardCadastro from './components/CardCadastro'
 import { ThemeProvider } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
+import Home from './components/Home';
+import CardProdutos from './components/CardProdutos';
+import CardCadastro from './components/CardCadastro';
 import Header from './components/Header';
 
 const GlobalStyle = createGlobalStyle`
@@ -32,6 +30,14 @@ class App extends React.Component {
 
 	mudarParaCarrinho = () => {
 		this.setState({ paginaAtual: "carrinho" })
+	}
+
+	mudarParaLista = () => {
+		this.setState({ paginaAtual: "lista" })
+	}
+
+	mudarParaCadastro = () => {
+		this.setState ({ paginaAtual: "cadastro" })
 	}
 
 	onClickToCard = (  allJobs ,idProduto) => {
@@ -71,35 +77,37 @@ class App extends React.Component {
 	mudarPagina = () => {
 		switch (this.state.paginaAtual) {
 			case "home":
+				return <Home mudarParaHome={this.mudarParaHome}
+				mudarParaLista={this.mudarParaLista}
+				mudarParaCadastro={this.mudarParaCadastro}/>
+			case "carrinho":
+				return <PaginaCarrinho 
+				produtosNoCarrinho={this.state.produtosNoCarrinho}
+				removerDoCarrinho={this.removerDoCarrinho}
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}/>
+
+			case "lista":
 				return <CardProdutos onClickToCard={this.onClickToCard}
 				produtosNoCarrinho={this.state.produtosNoCarrinho}
 				removerDoCarrinho={this.removerDoCarrinho}
 				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
 				/>
-			case "carrinho":
-				return <PaginaCarrinho/>
+			case "cadastro":
+				return <CardCadastro/>
 			default:
-				return <CardProdutos onClickToCard={this.onClickToCard}
-				produtosNoCarrinho={this.state.produtosNoCarrinho}/>
+				return <Home mudarParaHome={this.mudarParaHome}
+				mudarParaLista={this.mudarParaLista}
+				mudarParaCadastro={this.mudarParaCadastro}/>
 		}
 	}
 
-
 	render() {
 
-		console.log("produtoNoCarrinho", this.state.produtosNoCarrinho)
-
-
-	
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-				<Header mudarParaCarrinho={this.mudarParaCarrinho}
-					mudarParaHome={this.mudarParaHome} />
-				<Button>Contratar serviço</Button>
-				<Button>Seja um ninja</Button>
-
-				<CardCadastro/>
+				<Header mudarParaHome={this.mudarParaHome}
+				mudarParaCarrinho={this.mudarParaCarrinho}/>
 				{this.mudarPagina()}
 
 			</ThemeProvider>

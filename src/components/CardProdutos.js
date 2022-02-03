@@ -3,7 +3,6 @@ import Axios from 'axios';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import PaginaCarrinho from '../pages/PaginaCarrinho'
-
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
@@ -177,11 +176,6 @@ export default class CardProdutos extends Component {
 
     return (
       <div>
-        <PaginaCarrinho produtosNoCarrinho={this.props.produtosNoCarrinho}
-          removerDoCarrinho={this.props.removerDoCarrinho}
-          deixarCarrinhoVazio={this.props.deixarCarrinhoVazio}
-        />
-
         {this.state.toDetalhes &&
           <Filtros servicosMapeados={this.productsToScreen}
             EventoBuscaPornome={this.EventoBuscaPornome}
@@ -201,7 +195,6 @@ export default class CardProdutos extends Component {
               pegarIdProduto={this.pegarIdProduto}
               onClickToCard={this.props.onClickToCard}
             />}
-
         </Container>
       </div>
     )
