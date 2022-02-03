@@ -15,7 +15,6 @@ const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		background-color: #F5F4FC;
-		font-family: 'Roboto', sans-serif;
 	}
 `
 
@@ -50,68 +49,67 @@ class App extends React.Component {
 	}
 
 	mudarParaCadastro = () => {
-		this.setState({ paginaAtual: "cadastro" })
+		this.setState ({ paginaAtual: "cadastro" })
 	}
 
-	onClickToCard = (allJobs, idProduto) => {
+	onClickToCard = (  allJobs ,idProduto) => {
+		console.log('Carrinho', idProduto)
+		console.log('Carrinho', allJobs)
 		const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
 		if (produtoNoCarrinho) {
-			return alert("Esse produto já foi adicionado ao carrinho!")
+		  return alert("Esse produto já foi adicionado ao carrinho!")
 		} else {
-			const produtoParaAdicionar = allJobs.find(produto => idProduto === produto.id)
-
-			const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, { ...produtoParaAdicionar }]
-			alert("Serviço adicionado no carrinho!")
-
-			this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho })
+		  const produtoParaAdicionar = allJobs.find(produto => idProduto === produto.id)
+	
+		  const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+		  alert("Serviço adicionado no carrinho!")
+	
+		  this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
 		}
-	}
+	  }
 
-	removerDoCarrinho = (idProduto) => {
+	  removerDoCarrinho = (idProduto) => {
 		const copiaCarrinho = [...this.state.produtosNoCarrinho]
 		const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
-			return idProduto !== produto.id
+		  return idProduto !== produto.id
 		})
 		this.setState({ produtosNoCarrinho: ficaNoCarrinho })
-	}
+	  }
 
-	deixarCarrinhoVazio = () => {
+	  deixarCarrinhoVazio = () => {
 		this.setState({ produtosNoCarrinho: [] })
-	}
+	  }
 
 	//! Data que vem  Api getAllJobs la do cardproduto. 
 	gettingDataAPP = (dataJobs) => {
 		console.log('gettingDataAPP', dataJobs)
+
 	}
 
 	mudarPagina = () => {
 		switch (this.state.paginaAtual) {
 			case "home":
 				return <Home mudarParaHome={this.mudarParaHome}
-					mudarParaLista={this.mudarParaLista}
-					mudarParaCadastro={this.mudarParaCadastro} />
+				mudarParaLista={this.mudarParaLista}
+				mudarParaCadastro={this.mudarParaCadastro}/>
 			case "carrinho":
-				return <PaginaCarrinho
-					produtosNoCarrinho={this.state.produtosNoCarrinho}
-					removerDoCarrinho={this.removerDoCarrinho}
-					deixarCarrinhoVazio={this.deixarCarrinhoVazio}
-					mudarParaLista={this.mudarParaLista}
-					manterNoCarrinho={this.manterNoCarrinho} />
+				return <PaginaCarrinho 
+				produtosNoCarrinho={this.state.produtosNoCarrinho}
+				removerDoCarrinho={this.removerDoCarrinho}
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}/>
 
 			case "lista":
 				return <CardProdutos onClickToCard={this.onClickToCard}
-					produtosNoCarrinho={this.state.produtosNoCarrinho}
-					removerDoCarrinho={this.removerDoCarrinho}
-					deixarCarrinhoVazio={this.deixarCarrinhoVazio}
-					manterNoCarrinho={this.manterNoCarrinho}
-					getAllJobs={this.getAllJobs}
+				produtosNoCarrinho={this.state.produtosNoCarrinho}
+				removerDoCarrinho={this.removerDoCarrinho}
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
 				/>
 			case "cadastro":
-				return <CardCadastro />
+				return <CardCadastro/>
 			default:
 				return <Home mudarParaHome={this.mudarParaHome}
-					mudarParaLista={this.mudarParaLista}
-					mudarParaCadastro={this.mudarParaCadastro} />
+				mudarParaLista={this.mudarParaLista}
+				mudarParaCadastro={this.mudarParaCadastro}/>
 		}
 	}
 
@@ -121,7 +119,7 @@ class App extends React.Component {
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 				<Header mudarParaHome={this.mudarParaHome}
-					mudarParaCarrinho={this.mudarParaCarrinho} />
+				mudarParaCarrinho={this.mudarParaCarrinho}/>
 				{this.mudarPagina()}
 			</ThemeProvider>
 		)
