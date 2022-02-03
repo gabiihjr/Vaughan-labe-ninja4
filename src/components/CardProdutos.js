@@ -11,6 +11,33 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 margin: 10px;
+
+
+
+@media ( max-width:1100px){ 
+h3 { 
+  display: none;
+  justify-content: space-around;
+}
+input , select { 
+  width: 230px;
+  margin: 0 15px;
+}
+}
+
+@media ( max-width: 720px){ 
+  display: grid;
+ 
+  input , select { 
+  width: 230px;
+  margin: 5px 10%;
+  box-sizing: border-box;
+}
+/* flex-wrap:wrap; */
+
+}
+
+
 `
 
 const ProductContainer = styled.div`
