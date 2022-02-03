@@ -19,11 +19,14 @@ align-items: center;
 justify-content: center;
 
 p:first-child{ 
-  font-size: 2rem; 
+  margin:1rem 1rem;
+  font-size: 1.5rem;
+  color:#7867BF;
 }
 
 p { 
   margin: 10px;
+   
 }
 `
 
@@ -89,11 +92,11 @@ export default class PaginaDetalhes extends Component {
         {this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..."}
         <p>{this.state.job.description}</p>
        
-        <Button size="large" variant="contained" color="primary" 
+        <ButtonAdd size="large" variant="contained" color="primary" 
         onClick={() => this.props.onClickToCard(this.props.idJob)}
-        >ADD</Button>
-        <Button size="large" variant="contained" color="secondary" 
-        onClick={this.props.onClickToReturn}>Volta</Button>
+        >ADD</ButtonAdd>
+        <ButtonVoltar size="large" variant="contained" color="secondary" 
+        onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>
       </PaginaDetalhesDiv >
     )
   }

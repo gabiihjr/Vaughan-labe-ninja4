@@ -34,19 +34,22 @@ class App extends React.Component {
 		this.setState({ paginaAtual: "carrinho" })
 	}
 
-	onClickToCard = (idProduto) => {
+	onClickToCard = (  allJobs ,idProduto) => {
 		console.log('Carrinho', idProduto)
+		console.log('Carrinho', allJobs)
 		const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
 		if (produtoNoCarrinho) {
 		  return alert("Esse produto já foi adicionado ao carrinho!")
 		} else {
-		  const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
+		  const produtoParaAdicionar = allJobs.find(produto => idProduto === produto.id)
 	
 		  const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
 		  alert("Serviço adicionado no carrinho!")
 	
 		  this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
 		}
+
+		
 	  }
 
 	//! Data que vem  Api getAllJobs la do cardproduto. 
@@ -55,10 +58,11 @@ class App extends React.Component {
 
 	}
 
+
 	mudarPagina = () => {
 		switch (this.state.paginaAtual) {
 			case "home":
-				return <CardProdutos />
+				return <CardProdutos onClickToCard={this.onClickToCard}/>
 			case "carrinho":
 				return <PaginaCarrinho produtosNoCarrinho={this.state.produtosNoCarrinho}
 				onClickToCard ={this.onClickToCard}/>
@@ -69,6 +73,11 @@ class App extends React.Component {
 
 
 	render() {
+
+		console.log("produtoNoCarrinho", this.state.produtosNoCarrinho)
+
+
+	
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />

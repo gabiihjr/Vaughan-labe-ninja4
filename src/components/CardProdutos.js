@@ -26,6 +26,8 @@ p:first-child {
   margin:1rem 1rem;
   font-size: 1.5rem;
   color:#7867BF;
+  text-transform: capitalize; 
+
 } 
 
 >div{ 
@@ -128,19 +130,19 @@ export default class CardProdutos extends Component {
     const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
       return idProduto !== produto.id
     })
-    this.setState ({ produtosNoCarrinho: ficaNoCarrinho})
+    this.setState({ produtosNoCarrinho: ficaNoCarrinho })
   }
 
   deixarCarrinhoVazio = () => {
-    this.setState ({ produtosNoCarrinho: []})
+    this.setState({ produtosNoCarrinho: [] })
   }
 
   pegarIdProduto = (idProduto) => {
-    this.setState ({ produtosNoCarrinho: idProduto})
+    this.setState({ produtosNoCarrinho: idProduto })
   }
 
-    
-  onClickToReturn = ( )=> { 
+
+  onClickToReturn = () => {
     this.setState({
       toDetalhes: true,
     })
@@ -151,24 +153,21 @@ export default class CardProdutos extends Component {
   EventoMinimo = (event) => {
     this.setState({
       filtroMinimo: event.target.value
-
     })
   }
 
   EventoMaximo = (event) => {
-   this.setState({
-     filtroMaximo: event.target.value
+    this.setState({
+      filtroMaximo: event.target.value
+    })
+  }
 
-   })
- }
+  EventoBuscaPornome = (event) => {
+    this.setState({
+      filtroBuscaPorNome: event.target.value
 
- EventoBuscaPornome = (event) => {
-   this.setState({
-     filtroBuscaPorNome: event.target.value
-     
-
-   })
- }
+    })
+  }
 
   render() {
 
@@ -203,7 +202,7 @@ export default class CardProdutos extends Component {
         <div> <Button variant="text" color="primary"
           onClick={() => this.onClickToDetail(item.id)} >
           VER DETALHES </Button>
-          <Button onClick={() => this.onClickToCard(item.id)}>
+          <Button onClick={() => this.props.onClickToCard(this.state.jobs,item.id)}>
             <AddShoppingCartIcon />
           </Button>
         </div>
@@ -211,30 +210,30 @@ export default class CardProdutos extends Component {
 
     return (
       <div>
-          <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}
-          removerDoCarrinho = {this.removerDoCarrinho}
-          deixarCarrinhoVazio = {this.deixarCarrinhoVazio}
-          />
+        <PaginaCarrinho produtosNoCarrinho={this.state.produtosNoCarrinho}
+          removerDoCarrinho={this.removerDoCarrinho}
+          deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+        />
 
-         {this.state.toDetalhes && 
-         <Filtros servicosMapeados={this.productsToScreen}
-         EventoBuscaPornome = {this.EventoBuscaPornome }
-         EventoMinimo ={this.EventoMinimo}
-         EventoMaximo ={this.EventoMaximo}
-         
-         />}
+        {this.state.toDetalhes &&
+          <Filtros servicosMapeados={this.productsToScreen}
+            EventoBuscaPornome={this.EventoBuscaPornome}
+            EventoMinimo={this.EventoMinimo}
+            EventoMaximo={this.EventoMaximo}
+
+          />}
 
         <Container>
 
-          {this.state.toDetalhes ? productsToScreen : 
-          <PaginaDetalhes  
-          idJob={this.state.idJob} 
-          onClickToReturn={this.onClickToReturn}
-          produtosNoCarrinho = {this.state.produtosNoCarrinho}
-          jobs = {this.state.jobs}
-          pegarIdProduto = {this.pegarIdProduto}
-          onClickToCard = {this.onClickToCard}
-          />}
+          {this.state.toDetalhes ? productsToScreen :
+            <PaginaDetalhes
+              idJob={this.state.idJob}
+              onClickToReturn={this.onClickToReturn}
+              produtosNoCarrinho={this.state.produtosNoCarrinho}
+              jobs={this.state.jobs}
+              pegarIdProduto={this.pegarIdProduto}
+              onClickToCard={this.onClickToCard}
+            />}
 
         </Container>
       </div>
