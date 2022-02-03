@@ -21,8 +21,20 @@ const GlobalStyle = createGlobalStyle`
 class App extends React.Component {
 	state = {
 		paginaAtual: "home",
-		produtosNoCarrinho: []
-	}
+		produtosNoCarrinho: [],
+	};
+
+	componentDidMount() {
+		const carrinhoLocal = JSON.parse(localStorage.getItem("Produtos no Carrinho"))
+		if (carrinhoLocal) {
+			this.setState({ produtosNoCarrinho: carrinhoLocal })
+		}
+	};
+
+	componentDidUpdate() {
+		const carrinhoString = JSON.stringify(this.state.produtosNoCarrinho)
+		localStorage.setItem("Produtos no Carrinho", carrinhoString)
+	};
 
 	mudarParaHome = () => {
 		this.setState({ paginaAtual: "home" })
