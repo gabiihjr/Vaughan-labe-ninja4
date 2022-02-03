@@ -67,7 +67,8 @@ export default class CardProdutos extends Component {
   state = {
     jobs: [],
     toDetalhes: true,
-    idJob:'',
+    idJob: '',
+    ordenacao = "Crescente"
   }
 
   data = [];
@@ -100,11 +101,11 @@ export default class CardProdutos extends Component {
 
   onClickToDetail = (idProduto) => {
     console.log('Ver Detalhes', idProduto)
-    this.setState ({
+    this.setState({
       idJob: idProduto,
       toDetalhes: false,
 
-    }) 
+    })
 
     // Clicando Abre Pagina Detalhes
 
@@ -114,13 +115,21 @@ export default class CardProdutos extends Component {
   onClickToCard = (idProduto) => {
     console.log('Carrinho', idProduto)
     this.setState({
-     
+
     })
 
   }
 
+  ordenarProdutos = (event) => {
+    this.setState({
+      ordenacao: event.target.value,
+    });
+  };
+
+
 
   render() {
+
 
 
     const productsToScreen = this.state.jobs.map(item =>
@@ -132,21 +141,49 @@ export default class CardProdutos extends Component {
           &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
             { style: 'currency', currency: 'BRL' })}</strong></p>
         <div> <Button variant="text" color="primary"
-          onClick={() => this.onClickToDetail( item.id)} >
+          onClick={() => this.onClickToDetail(item.id)} >
           VER DETALHES </Button>
-          <Button onClick={() => this.onClickToCard( item.id)}>
+          <Button onClick={() => this.onClickToCard(item.id)}>
             <AddShoppingCartIcon />
           </Button>
         </div>
       </ProductContainer>)
 
+const servicosOrdenados = //2 passo
+this.productsToScreen &&
+this.productsToScreeeen.sort((a, b) => {
+  if (this.state.ordenacao === "Crescente") {
+    return a.price - b.price;
+  } else if(this.state.ordenacao === "Decrescente ") {
+    return b.price - a.price;
+   
+  }
+  else if(this.state.ordenacao === "Titulo"){
+    return titulo
+  } 
+
+  else {
+    return 
+  }
+});
+
     return (
       <Container>
+
+        <label>
+          Ordenação:
+          <select onChange={this.ordenarProdutos()}>
+            <option value={"Crescente"}>Crescente</option>
+            <option value={"Decrescente"}>Decrescente</option>
+            <option value ={"Titulo"}>Titulo</option>
+            <option value ={"Prazo "}>Prazo</option>
+          </select>
+        </label>
 
         {productsToScreen}
         {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
 
-        {this.state.toDetalhes ? productsToScreen :<PaginaDetalhes idJob ={this.state.idJob}/>}
+        {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
 
       </Container>
     )
