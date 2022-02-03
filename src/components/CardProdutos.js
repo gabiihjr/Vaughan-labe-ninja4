@@ -110,45 +110,12 @@ export default class CardProdutos extends Component {
 
   }
 
-  // onClickToCard = (idProduto) => {
-  //   console.log('Carrinho', idProduto)
-  //   const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
-  //   if (produtoNoCarrinho) {
-  //     return alert("Esse produto já foi adicionado ao carrinho!")
-  //   } else {
-  //     const produtoParaAdicionar = this.state.jobs.find(produto => idProduto === produto.id)
-
-  //     const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
-  //     alert("Serviço adicionado no carrinho!")
-
-  //     this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
-  //   }
-  // }
-
-  removerDoCarrinho = (idProduto) => {
-    const copiaCarrinho = [...this.state.produtosNoCarrinho]
-    const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
-      return idProduto !== produto.id
-    })
-    this.setState({ produtosNoCarrinho: ficaNoCarrinho })
-  }
-
-  deixarCarrinhoVazio = () => {
-    this.setState({ produtosNoCarrinho: [] })
-  }
-
-  pegarIdProduto = (idProduto) => {
-    this.setState({ produtosNoCarrinho: idProduto })
-  }
-
-
   onClickToReturn = () => {
     this.setState({
       toDetalhes: true,
     })
 
   }
-
 
   EventoMinimo = (event) => {
     this.setState({
@@ -210,9 +177,9 @@ export default class CardProdutos extends Component {
 
     return (
       <div>
-        <PaginaCarrinho produtosNoCarrinho={this.state.produtosNoCarrinho}
-          removerDoCarrinho={this.removerDoCarrinho}
-          deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+        <PaginaCarrinho produtosNoCarrinho={this.props.produtosNoCarrinho}
+          removerDoCarrinho={this.props.removerDoCarrinho}
+          deixarCarrinhoVazio={this.props.deixarCarrinhoVazio}
         />
 
         {this.state.toDetalhes &&
@@ -229,10 +196,10 @@ export default class CardProdutos extends Component {
             <PaginaDetalhes
               idJob={this.state.idJob}
               onClickToReturn={this.onClickToReturn}
-              produtosNoCarrinho={this.state.produtosNoCarrinho}
+              produtosNoCarrinho={this.props.produtosNoCarrinho}
               jobs={this.state.jobs}
               pegarIdProduto={this.pegarIdProduto}
-              onClickToCard={this.onClickToCard}
+              onClickToCard={this.props.onClickToCard}
             />}
 
         </Container>
