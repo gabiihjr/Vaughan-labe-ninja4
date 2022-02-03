@@ -3,14 +3,10 @@ import Axios from 'axios';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import PaginaCarrinho from '../pages/PaginaCarrinho'
-
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
-
-
-///   APi  - Output  get all jobs  - for test only.
-
+import { Filtros } from './Filtros';
 
 
 
@@ -29,6 +25,8 @@ p:first-child {
   margin:1rem 1rem;
   font-size: 1.5rem;
   color:#7867BF;
+  text-transform: capitalize; 
+
 } 
 
 >div{ 
@@ -68,7 +66,10 @@ export default class CardProdutos extends Component {
     jobs: [],
     toDetalhes: true,
     idJob: '',
-    ordenacao = "Crescente"
+    produtosNoCarrinho: [],
+    filtroMaximo: 0,
+    filtroMinimo: 20,
+    filtroBuscaPorNome: ""
   }
 
   data = [];
@@ -95,10 +96,6 @@ export default class CardProdutos extends Component {
 
   }
 
-  state = {
-    produtosNoCarrinho: []
-  }
-
   onClickToDetail = (idProduto) => {
     console.log('Ver Detalhes', idProduto)
     this.setState({
@@ -112,27 +109,55 @@ export default class CardProdutos extends Component {
 
   }
 
-  onClickToCard = (idProduto) => {
-    console.log('Carrinho', idProduto)
+  onClickToReturn = () => {
     this.setState({
-
+      toDetalhes: true,
     })
 
   }
 
-  ordenarProdutos = (event) => {
+  EventoMinimo = (event) => {
     this.setState({
-      ordenacao: event.target.value,
-    });
-  };
+      filtroMinimo: event.target.value
+    })
+  }
 
+  EventoMaximo = (event) => {
+    this.setState({
+      filtroMaximo: event.target.value
+    })
+  }
 
+  EventoBuscaPornome = (event) => {
+    this.setState({
+      filtroBuscaPorNome: event.target.value
+
+    })
+  }
 
   render() {
 
 
+    const productsToScreen = this.state.jobs.filter(servico => {
+      if (this.state.filtroMinimo) {
+        return servico.price >= this.state.filtroMinimo
+      }
+      else {
+        return servico
+      }
+    }).filter(servico => {
+      if (this.state.filtroMaximo) {
+        return servico.price <= this.state.filtroMaximo
+      } else {
 
-    const productsToScreen = this.state.jobs.map(item =>
+        return servico
+
+      }
+    }).filter((servico => {
+      return servico.title.includes(this.state.filtroBuscaPorNome);
+    })
+
+    ).map(item =>
       <ProductContainer
         key={item.id}>
         <p>{item.title}</p>
@@ -143,7 +168,7 @@ export default class CardProdutos extends Component {
         <div> <Button variant="text" color="primary"
           onClick={() => this.onClickToDetail(item.id)} >
           VER DETALHES </Button>
-          <Button onClick={() => this.onClickToCard(item.id)}>
+          <Button onClick={() => this.props.onClickToCard(this.state.jobs,item.id)}>
             <AddShoppingCartIcon />
           </Button>
         </div>
@@ -168,24 +193,28 @@ this.productsToScreeeen.sort((a, b) => {
 });
 
     return (
-      <Container>
+      <div>
+        {this.state.toDetalhes &&
+          <Filtros servicosMapeados={this.productsToScreen}
+            EventoBuscaPornome={this.EventoBuscaPornome}
+            EventoMinimo={this.EventoMinimo}
+            EventoMaximo={this.EventoMaximo}
 
-        <label>
-          Ordenação:
-          <select onChange={this.ordenarProdutos()}>
-            <option value={"Crescente"}>Crescente</option>
-            <option value={"Decrescente"}>Decrescente</option>
-            <option value ={"Titulo"}>Titulo</option>
-            <option value ={"Prazo "}>Prazo</option>
-          </select>
-        </label>
+          />}
 
-        {productsToScreen}
-        {/* <PaginaCarrinho produtosNoCarrinho = {this.state.produtosNoCarrinho}/> */}
+        <Container>
 
-        {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
-
-      </Container>
+          {this.state.toDetalhes ? productsToScreen :
+            <PaginaDetalhes
+              idJob={this.state.idJob}
+              onClickToReturn={this.onClickToReturn}
+              produtosNoCarrinho={this.props.produtosNoCarrinho}
+              jobs={this.state.jobs}
+              pegarIdProduto={this.pegarIdProduto}
+              onClickToCard={this.props.onClickToCard}
+            />}
+        </Container>
+      </div>
     )
   }
 }

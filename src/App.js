@@ -1,13 +1,11 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-import { Filtros } from './components/Filtros'
 import PaginaCarrinho from './pages/PaginaCarrinho'
-import PaginaListagem from './pages/PaginaListagem';
-import CardProdutos from './components/CardProdutos';
-// import styled from 'styled-components';
 import { ThemeProvider } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import { theme } from './constants/Tema';
+import Home from './components/Home';
+import CardProdutos from './components/CardProdutos';
+import CardCadastro from './components/CardCadastro';
 import Header from './components/Header';
 
 const GlobalStyle = createGlobalStyle`
@@ -20,38 +18,97 @@ const GlobalStyle = createGlobalStyle`
 	}
 `
 
-const BotaoTeste = styled(Button)`
-		/* background-color: #7867BF; */
-    margin: 100px 500px;
-	padding: 30px;
-	border: 10px solid red;
-	:hover{
-		background-color: #b9a8ff;
-	}
-}
-`
-
-
 class App extends React.Component {
+	state = {
+		paginaAtual: "home",
+		produtosNoCarrinho: []
+	}
 
-     gettingDataAPP = (dataJobs) => { 
-		 console.log('gettingDataAPP',dataJobs)
+	mudarParaHome = () => {
+		this.setState({ paginaAtual: "home" })
+	}
 
-	 }
+	mudarParaCarrinho = () => {
+		this.setState({ paginaAtual: "carrinho" })
+	}
 
+	mudarParaLista = () => {
+		this.setState({ paginaAtual: "lista" })
+	}
+
+	mudarParaCadastro = () => {
+		this.setState ({ paginaAtual: "cadastro" })
+	}
+
+	onClickToCard = (  allJobs ,idProduto) => {
+		console.log('Carrinho', idProduto)
+		console.log('Carrinho', allJobs)
+		const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => idProduto === produto.id)
+		if (produtoNoCarrinho) {
+		  return alert("Esse produto já foi adicionado ao carrinho!")
+		} else {
+		  const produtoParaAdicionar = allJobs.find(produto => idProduto === produto.id)
+	
+		  const novosProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtoParaAdicionar}]
+		  alert("Serviço adicionado no carrinho!")
+	
+		  this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
+		}
+	  }
+
+	  removerDoCarrinho = (idProduto) => {
+		const copiaCarrinho = [...this.state.produtosNoCarrinho]
+		const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
+		  return idProduto !== produto.id
+		})
+		this.setState({ produtosNoCarrinho: ficaNoCarrinho })
+	  }
+
+	  deixarCarrinhoVazio = () => {
+		this.setState({ produtosNoCarrinho: [] })
+	  }
+
+	//! Data que vem  Api getAllJobs la do cardproduto. 
+	gettingDataAPP = (dataJobs) => {
+		console.log('gettingDataAPP', dataJobs)
+
+	}
+
+	mudarPagina = () => {
+		switch (this.state.paginaAtual) {
+			case "home":
+				return <Home mudarParaHome={this.mudarParaHome}
+				mudarParaLista={this.mudarParaLista}
+				mudarParaCadastro={this.mudarParaCadastro}/>
+			case "carrinho":
+				return <PaginaCarrinho 
+				produtosNoCarrinho={this.state.produtosNoCarrinho}
+				removerDoCarrinho={this.removerDoCarrinho}
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}/>
+
+			case "lista":
+				return <CardProdutos onClickToCard={this.onClickToCard}
+				produtosNoCarrinho={this.state.produtosNoCarrinho}
+				removerDoCarrinho={this.removerDoCarrinho}
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+				/>
+			case "cadastro":
+				return <CardCadastro/>
+			default:
+				return <Home mudarParaHome={this.mudarParaHome}
+				mudarParaLista={this.mudarParaLista}
+				mudarParaCadastro={this.mudarParaCadastro}/>
+		}
+	}
 
 	render() {
+
 		return (
 			<ThemeProvider theme={theme}>
-				<Header />
-				<Button>Contratar serviço</Button>
-				<Button>Seja um ninja</Button>
-				{/* <PaginaListagem gettingDataAPP={this.gettingDataAPP}/> */}
-
-				
 				<GlobalStyle />
-			
-				<BotaoTeste variant="contained" color="primary">TESTE LALALA</BotaoTeste>
+				<Header mudarParaHome={this.mudarParaHome}
+				mudarParaCarrinho={this.mudarParaCarrinho}/>
+				{this.mudarPagina()}
 			</ThemeProvider>
 		)
 	}

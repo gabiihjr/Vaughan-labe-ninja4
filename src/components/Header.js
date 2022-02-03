@@ -14,7 +14,6 @@ border: solid 1px black;
 
 
 
-
 export default class Header extends React.Component {
 
     render() {
@@ -22,8 +21,8 @@ export default class Header extends React.Component {
             <div>
                 <Cabeçario>
                     <h1>LabeNinjas</h1>
-                    <Button>Home</Button>
-                    <Button>Carrinho</Button>
+                    <Button onClick={this.props.mudarParaHome}>Home</Button>
+                    <Button onClick={this.props.mudarParaCarrinho}>Carrinho</Button>
                 </Cabeçario>
             </div>
         )
