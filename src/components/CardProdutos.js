@@ -12,17 +12,14 @@ const Cabecalho = styled.div`
 display: flex;
 justify-content: space-between;
 align-items: center;
-
-
 `
-
-
-
 
 const ProductContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content:center;
+text-align:center;
 box-shadow: 0 0 1px 5px #f4f2fae7;
 padding:1rem 1rem 1rem 1rem;
 background-color: #dad1ff;
@@ -59,26 +56,41 @@ button{
 }
 `
 
+
 const Container = styled.div`
-/* flex-wrap: wrap; */
-display: grid;
-grid-template-columns:repeat(4, 1fr) ;
-gap:1rem;
-width: 100%;
-padding: 0 2rem;
-box-sizing: border-box;
+  display: grid;
+  grid-template-columns:repeat(4, 1fr) ;
+  gap:1rem;
+  width: 100%;
+  margin-top: 5%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: 900px) {
+  grid-template-columns:repeat(3, 1fr) ;
+  }
+  
+  @media (max-width: 680px) {
+  grid-template-columns:repeat(2, 1fr) ;
+  }
+  @media (max-width: 480px) {
+  grid-template-columns:1fr ;
+  }
+
+
+
 `
 
 export default class CardProdutos extends Component {
   state = {
     jobs: [],
-    toDetalhes: true,
+    toDetalhes:true,
     idJob: '',
-    produtosNoCarrinho: [],
+    produtosNoCarrinho:[],
     filtroMaximo: "",
     filtroMinimo: "",
     filtroBuscaPorNome: "",
-    ordenacao: "Crescente"
+    ordenacao: "Crescente",
   }
 
   data = [];
@@ -90,7 +102,6 @@ export default class CardProdutos extends Component {
 
     const url = `${labeninjasURL}/jobs`;
     const axiosConfig = { headers: { Authorization: key } }
-
 
     Axios
       .get(url, axiosConfig)
@@ -206,9 +217,9 @@ export default class CardProdutos extends Component {
 
 
     return (
-      <div>
+       <div>
 
-<Cabecalho>
+       <Cabecalho>
         
         <h3>Valor Mínimo</h3>
         <input 
@@ -241,14 +252,8 @@ export default class CardProdutos extends Component {
           <option value={"Titulo"}>Titulo</option>
           <option value={"Prazo"}>Prazo</option>
           </select>
-    </Cabecalho>
-        {/* {this.state.toDetalhes &&
-          <Filtros servicosMapeados={this.productsToScreen}
-            EventoBuscaPornome={this.EventoBuscaPornome}
-            EventoMinimo={this.EventoMinimo}
-            EventoMaximo={this.EventoMaximo}
+        </Cabecalho>
 
-          />} */}
 
         <Container>
 

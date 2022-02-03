@@ -7,6 +7,30 @@ import Axios from 'axios';
 import { red } from '@material-ui/core/colors';
 
 
+
+const ButtonAdd = styled(Button)`
+ &&{ 
+   width: 100%;
+ }
+
+ @media (max-width: 480px) {
+  &&width: 45%;
+  }
+
+
+`
+const ButtonVoltar = styled(Button)`
+ &&{ 
+   width: 100%;
+ }
+ @media (max-width: 480px) {
+  && width: 45%;
+  }
+
+
+`
+
+
 const PaginaDetalhesDiv = styled.div`
 border: 1px solid black; 
 margin: 20% auto;
@@ -17,6 +41,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+text-align:center;
 
 p:first-child{ 
   margin:1rem 1rem;
@@ -28,20 +53,18 @@ p {
   margin: 10px;
    
 }
-`
 
-const ButtonAdd = styled(Button)`
- &&{ 
-   width: 100%;
- }
+ 
+  @media (max-width: 680px) {
+    margin-top: 40%
 
-`
-const ButtonVoltar = styled(Button)`
- &&{ 
-   width: 100%;
- }
+  }
+ 
+
 
 `
+
+
 
 export default class PaginaDetalhes extends Component {
 
