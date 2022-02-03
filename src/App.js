@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import PaginaCarrinho from './pages/PaginaCarrinho'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from './constants/Tema';
