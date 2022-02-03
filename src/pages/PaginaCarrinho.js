@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CardCarrinho from '../components/CardCarrinho';
 import styled from 'styled-components';
-import Header from '../components/Header';
 
 const CarrinhoContainer = styled.div`
   display: flex;
