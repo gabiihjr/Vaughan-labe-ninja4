@@ -2,29 +2,48 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import PaginaCarrinho from '../pages/PaginaCarrinho'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
-import { Filtros } from './Filtros';
-import { TextField } from '@material-ui/core';
+
+
+
 
 
 const Cabecalho = styled.div`
 display: flex;
 justify-content: space-between;
 align-items: center;
+margin: 10px;
 
+@media ( max-width:1100px){ 
+h3 { 
+  display: none;
+  justify-content: space-around;
+}
+input , select { 
+  width: 230px;
+  margin: 0 15px;
+}
+}
 
+@media ( max-width: 720px){ 
+  display: grid;
+ 
+  input , select { 
+  width: 230px;
+  margin: 5px 10%;
+  box-sizing: border-box;
+  }
+}
 `
-
-
-
 
 const ProductContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content:center;
+text-align:center;
 box-shadow: 0 0 1px 5px #f4f2fae7;
 padding:1rem 1rem 1rem 1rem;
 background-color: #dad1ff;
@@ -62,13 +81,25 @@ button{
 `
 
 const Container = styled.div`
-/* flex-wrap: wrap; */
-display: grid;
-grid-template-columns:repeat(4, 1fr) ;
-gap:1rem;
-width: 100%;
-padding: 0 2rem;
-box-sizing: border-box;
+  display: grid;
+  grid-template-columns:repeat(4, 1fr) ;
+  gap:1rem;
+  width: 100%;
+  margin-top: 5%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: 900px) {
+  grid-template-columns:repeat(3, 1fr) ;
+  }
+  
+  @media (max-width: 680px) {
+  grid-template-columns:repeat(2, 1fr) ;
+  }
+  @media (max-width: 480px) {
+  grid-template-columns:1fr ;
+  }
+
 `
 
 export default class CardProdutos extends Component {
@@ -76,11 +107,10 @@ export default class CardProdutos extends Component {
     jobs: [],
     toDetalhes: true,
     idJob: '',
-    produtosNoCarrinho: [],
     filtroMaximo: "",
     filtroMinimo: "",
     filtroBuscaPorNome: "",
-    ordenacao: "Crescente"
+    ordenacao: "Crescente",
   }
 
   data = [];
@@ -93,7 +123,6 @@ export default class CardProdutos extends Component {
     const url = `${labeninjasURL}/jobs`;
     const axiosConfig = { headers: { Authorization: key } }
 
-
     Axios
       .get(url, axiosConfig)
       .then(res => {
@@ -101,10 +130,8 @@ export default class CardProdutos extends Component {
         this.setState({ jobs: res.data.jobs })
         this.props.gettingDataAPP(res.data.jobs)
         this.props.gettingDataPaginaListagem(res.data.jobs)
-
       })
       .catch(err => console.log(err))
-
   }
 
   onClickToDetail = (idProduto) => {
@@ -112,15 +139,11 @@ export default class CardProdutos extends Component {
     this.setState({
       idJob: idProduto,
       toDetalhes: false,
-
     })
-
     // Clicando Abre Pagina Detalhes
-
-
   }
 
-  mudarOrdem = (event) =>{
+  mudarOrdem = (event) => {
     this.setState({
       ordenacao: event.target.value
     })
@@ -175,83 +198,75 @@ export default class CardProdutos extends Component {
     }).filter((servico => {
       return servico.title.toLowerCase().includes(this.state.filtroBuscaPorNome.toLowerCase()) //Ele vai pegar e transformar em minusculo
     }))
-    .sort((a, b) => {
+      .sort((a, b) => {
         if (this.state.ordenacao === "Crescente") {
           return a.price - b.price;
-        } else if(this.state.ordenacao === "Decrescente") {
+        } else if (this.state.ordenacao === "Decrescente") {
           return b.price - a.price;
-         }
-        else if(this.state.ordenacao === "Titulo"){
+        }
+        else if (this.state.ordenacao === "Titulo") {
           return a.title.localeCompare(b.title)   //localeCompare compara duas strings 
         }
-        else if(this.state.ordenacao === "Prazo"){
-          return new Date( a.dueDate).getTime()- new Date(b.dueDate).getTime(); //Ele transforma para milissegundos
+        else if (this.state.ordenacao === "Prazo") {
+          return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(); //Ele transforma para milissegundos
         }
-     })       //a = primeiroProduto e b  próximo produto
-    .map(item =>
-      <ProductContainer
-        key={item.id}>
-        <p>{item.title}</p>
-        {/* A data Ta errada mes a menos  */}
-        <p>Até {(new Date(item.dueDate)).toLocaleDateString()}
-          &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
-            { style: 'currency', currency: 'BRL' })}</strong></p>
-        <div> <Button variant="text" color="primary"
-          onClick={() => this.onClickToDetail(item.id)} >
-          VER DETALHES </Button>
-          <Button onClick={() => this.props.onClickToCard(this.state.jobs,item.id)}>
-            <AddShoppingCartIcon />
-          </Button>
-        </div>
-      </ProductContainer>)
+      })       //a = primeiroProduto e b  próximo produto
+      .map(item =>
+        <ProductContainer
+          key={item.id}>
+          <p>{item.title}</p>
+          {/* A data Ta errada mes a menos  */}
+          <p>Até {(new Date(item.dueDate)).toLocaleDateString()}
+            &nbsp; por  <strong>{(item.price).toLocaleString('pt-BR',
+              { style: 'currency', currency: 'BRL' })}</strong></p>
+          <div> <Button variant="text" color="primary"
+            onClick={() => this.onClickToDetail(item.id)} >
+            VER DETALHES </Button>
+            <Button onClick={() => this.props.onClickToCard(this.state.jobs, item.id)}>
+              <AddShoppingCartIcon />
+            </Button>
+          </div>
+        </ProductContainer>)
 
 
 
     return (
       <div>
 
-<TextField>
-        
-        <h3>Valor Mínimo</h3>
-        <input 
-        placeholder='Valor Mínimo'
-        type = "number"
-        value = {this.state.filtroMinimo}
-        onChange={ this.EventoMinimo}
-        />
+        <Cabecalho>
 
-        <h3>Valor Máximo</h3>
-        <input  
-        placeholder='Valor Máximo'
-        type = "number"
-        value = {this.state.filtroMaximo}
-        onChange={ this.EventoMaximo}
-        />
+          <h3>Valor Mínimo</h3>
+          <input
+            placeholder='Valor Mínimo'
+            type="number"
+            value={this.state.filtroMinimo}
+            onChange={this.EventoMinimo}
+          />
 
-        <h3>Busca por nome</h3>
-        <input
-        placeholder='Busca por título ou descrição'
-        type = "text"
-        value = {this.state.filtroBuscaPorNome} //Sempre
-        onChange={this.EventoBuscaPornome}
-          
-        />
+          <h3>Valor Máximo</h3>
+          <input
+            placeholder='Valor Máximo'
+            type="number"
+            value={this.state.filtroMaximo}
+            onChange={this.EventoMaximo}
+          />
+
+          <h3>Busca por nome</h3>
+          <input
+            placeholder='Busca por título ou descrição'
+            type="text"
+            value={this.state.filtroBuscaPorNome} //Sempre
+            onChange={this.EventoBuscaPornome}
+
+          />
           <h3>Ordenação</h3>
-           <select   value = {this.state.ordenacao}  onChange ={this.mudarOrdem}>     
-          <option value={"Crescente"}>Preço Crescente</option>
-          <option value={"Decrescente"}>Preço Decrescente</option>
-          <option value={"Titulo"}>Titulo</option>
-          <option value={"Prazo"}>Prazo</option>
+          <select value={this.state.ordenacao} onChange={this.mudarOrdem}>
+            <option value={"Crescente"}>Preço Crescente</option>
+            <option value={"Decrescente"}>Preço Decrescente</option>
+            <option value={"Titulo"}>Titulo</option>
+            <option value={"Prazo"}>Prazo</option>
           </select>
-    </TextField>
-        {/* {this.state.toDetalhes &&
-          <Filtros servicosMapeados={this.productsToScreen}
-            EventoBuscaPornome={this.EventoBuscaPornome}
-            EventoMinimo={this.EventoMinimo}
-            EventoMaximo={this.EventoMaximo}
-
-          />} */}
-
+        </Cabecalho>
         <Container>
 
           {this.state.toDetalhes ? productsToScreen :

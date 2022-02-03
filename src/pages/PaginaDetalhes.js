@@ -7,28 +7,6 @@ import Axios from 'axios';
 import { red } from '@material-ui/core/colors';
 
 
-const PaginaDetalhesDiv = styled.div`
-border: 1px solid black; 
-margin: 20% auto;
-width: 70vw;
-max-width: 500px;
-grid-column: 1/-1;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-
-p:first-child{ 
-  margin:1rem 1rem;
-  font-size: 1.5rem;
-  color:#7867BF;
-}
-
-p { 
-  margin: 10px;
-   
-}
-`
 
 const ButtonAdd = styled(Button)`
  &&{ 
@@ -40,8 +18,52 @@ const ButtonVoltar = styled(Button)`
  &&{ 
    width: 100%;
  }
+`
+const ButtonsDiv = styled.div`
+width: 100%;
+
+@media (max-width: 480px) {
+  width: 100%;
+  display: flex;
+  }
 
 `
+
+
+const PaginaDetalhesDiv = styled.div`
+border: 1px solid black; 
+margin: 20% auto;
+width: 70vw;
+max-width: 500px;
+grid-column: 1/-1;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align:center;
+
+p:first-child{ 
+  margin:1rem 1rem;
+  font-size: 1.5rem;
+  color:#7867BF;
+}
+
+p { 
+  margin: 10px;
+   
+}
+
+ 
+  @media (max-width: 680px) {
+    margin-top: 40%
+
+  }
+  
+
+
+`
+
+
 
 export default class PaginaDetalhes extends Component {
 
@@ -91,12 +113,13 @@ export default class PaginaDetalhes extends Component {
         }</p>
         {this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..."}
         <p>{this.state.job.description}</p>
-       
+        <ButtonsDiv>
         <ButtonAdd size="large" variant="contained" color="primary" 
         onClick={() => this.props.onClickToCard(this.props.jobs, this.props.idJob)}
         >ADD</ButtonAdd>
         <ButtonVoltar size="large" variant="contained" color="secondary" 
         onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>
+        </ButtonsDiv>
       </PaginaDetalhesDiv >
     )
   }

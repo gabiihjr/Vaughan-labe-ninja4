@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import CardCarrinho from '../components/CardCarrinho';
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 
 const CarrinhoContainer = styled.div`
   display: flex;
-  border: 1px solid black;
-  background-color: #dad1ff;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  button {
+  margin: 10px;
+  h1{
     margin: 10px;
   }
   h3 {
@@ -18,17 +17,6 @@ const CarrinhoContainer = styled.div`
 `
 
 export default class PaginaCarrinho extends Component {
-
-  state = {
-    carrinhoLocal: []
-  }
-
-  componentDidMount() {
-    // const carrinhoLocalStorage = JSON.parse(localStorage.getItem("Itens no Carrinho"))
-    // const newCarrinho = 
-    // console.log(carrinhoLocalStorage)
-    this.setState({ carrinhoLocal: this.props.produtosNoCarrinho })
-  }
 
   calcularTotal = () => {
     let valorTotal = 0
@@ -48,13 +36,13 @@ export default class PaginaCarrinho extends Component {
     return (
       <CarrinhoContainer>
         <h1>Carrinho</h1>
-        <button> Voltar para lista </button>
+        <Button variant="contained" color="primary" onClick={this.props.mudarParaLista}> Voltar para lista </Button>
         {this.props.produtosNoCarrinho.map((item) => {
           return <CardCarrinho itemCarrinho={item}
             removerDoCarrinho={this.props.removerDoCarrinho} />
         })}
         <h3>Total: R$ {this.calcularTotal()}.00</h3>
-        <button onClick={this.alertaDeCompra}>Contratar serviços</button>
+        <Button variant="contained" color="primary" onClick={this.alertaDeCompra}>Contratar serviços</Button>
       </CarrinhoContainer>
     )
   }
