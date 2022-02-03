@@ -97,7 +97,8 @@ class App extends React.Component {
 				return <PaginaCarrinho 
 				produtosNoCarrinho={this.state.produtosNoCarrinho}
 				removerDoCarrinho={this.removerDoCarrinho}
-				deixarCarrinhoVazio={this.deixarCarrinhoVazio}/>
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+				mudarParaLista={this.mudarParaLista}/>
 
 			case "lista":
 				return <CardProdutos onClickToCard={this.onClickToCard}
