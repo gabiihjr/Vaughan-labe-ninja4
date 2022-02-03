@@ -12,6 +12,9 @@ const CardContainer = styled.div`
   color: white;
   padding: 20px;
   margin: 10px;
+  border-radius: .5em;
+  width: 400px;
+  height: 100px;
   p {
     margin: 10px;
     text-transform: capitalize;
@@ -24,13 +27,11 @@ const CardContainer = styled.div`
 export default class CardCarrinho extends Component {
   render() {
     return (
-      <div>
         <CardContainer>
         <p>{this.props.itemCarrinho.title}</p>
         <p>R${this.props.itemCarrinho.price},00</p>
         <Button onClick={() => this.props.removerDoCarrinho(this.props.itemCarrinho.id)}><DeleteIcon color="secondary" /></Button>
       </CardContainer>
-      </div>
     )
   }
 }
