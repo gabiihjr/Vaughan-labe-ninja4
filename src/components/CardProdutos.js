@@ -5,6 +5,11 @@ import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
+import { TextField } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 
@@ -12,7 +17,7 @@ import PaginaDetalhes from '../pages/PaginaDetalhes';
 
 const Cabecalho = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: space-around;
 align-items: center;
 margin: 10px;
 
@@ -234,38 +239,64 @@ export default class CardProdutos extends Component {
       <div>
 
         <Cabecalho>
+         
 
-          <h3>Valor Mínimo</h3>
-          <input
-            placeholder='Valor Mínimo'
+          <TextField
+            id="standard"
+            label='R$ Valor Mínimo'
             type="number"
+            variant="standard"
             value={this.state.filtroMinimo}
             onChange={this.EventoMinimo}
           />
 
-          <h3>Valor Máximo</h3>
-          <input
-            placeholder='Valor Máximo'
+
+          <TextField
+            id="standard"
+            variant="standard"
+            label='R$ Valor Máximo'
             type="number"
             value={this.state.filtroMaximo}
             onChange={this.EventoMaximo}
           />
 
-          <h3>Busca por nome</h3>
-          <input
-            placeholder='Busca por título ou descrição'
+          
+          <TextField
+            id="standard"
+            variant="standard"
+            label='Busca por título'
             type="text"
             value={this.state.filtroBuscaPorNome} //Sempre
             onChange={this.EventoBuscaPornome}
 
           />
-          <h3>Ordenação</h3>
-          <select value={this.state.ordenacao} onChange={this.mudarOrdem}>
+          
+
+
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Ordenação</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={this.state.ordenacao}
+          onChange={this.mudarOrdem}
+          label="Ordenação"
+        >
+          
+          <MenuItem value={"Crescente"}>Preço Crescente</MenuItem>
+          <MenuItem value={"Decrescente"}>Preço Descrescente</MenuItem>
+          <MenuItem value={"Titulo"}>Título</MenuItem>
+         <MenuItem value={"Prazo"}>Prazo</MenuItem>
+        </Select>
+      </FormControl>
+
+
+          {/* <select value={this.state.ordenacao} onChange={this.mudarOrdem}>
             <option value={"Crescente"}>Preço Crescente</option>
             <option value={"Decrescente"}>Preço Decrescente</option>
             <option value={"Titulo"}>Titulo</option>
             <option value={"Prazo"}>Prazo</option>
-          </select>
+          </select> */}
         </Cabecalho>
         <Container>
 
