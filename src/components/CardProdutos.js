@@ -8,6 +8,14 @@ import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import PaginaDetalhes from '../pages/PaginaDetalhes';
 import { Filtros } from './Filtros';
 
+const Cabecalho = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+
+`
+
 
 
 
@@ -67,9 +75,10 @@ export default class CardProdutos extends Component {
     toDetalhes: true,
     idJob: '',
     produtosNoCarrinho: [],
-    filtroMaximo: 0,
-    filtroMinimo: 20,
-    filtroBuscaPorNome: ""
+    filtroMaximo: "",
+    filtroMinimo: "",
+    filtroBuscaPorNome: "",
+    ordenacao: "Crescente"
   }
 
   data = [];
@@ -109,6 +118,13 @@ export default class CardProdutos extends Component {
 
   }
 
+  mudarOrdem = (event) =>{
+    this.setState({
+      ordenacao: event.target.value
+    })
+
+  }
+
   onClickToReturn = () => {
     this.setState({
       toDetalhes: true,
@@ -129,6 +145,7 @@ export default class CardProdutos extends Component {
   }
 
   EventoBuscaPornome = (event) => {
+    console.log(event)
     this.setState({
       filtroBuscaPorNome: event.target.value
 
@@ -154,10 +171,22 @@ export default class CardProdutos extends Component {
 
       }
     }).filter((servico => {
-      return servico.title.includes(this.state.filtroBuscaPorNome);
-    })
-
-    ).map(item =>
+      return servico.title.toLowerCase().includes(this.state.filtroBuscaPorNome.toLowerCase()) //Ele vai pegar e transformar em minusculo
+    }))
+    .sort((a, b) => {
+        if (this.state.ordenacao === "Crescente") {
+          return a.price - b.price;
+        } else if(this.state.ordenacao === "Decrescente") {
+          return b.price - a.price;
+         }
+        else if(this.state.ordenacao === "Titulo"){
+          return a.title.localeCompare(b.title)   //localeCompare compara duas strings 
+        }
+        else if(this.state.ordenacao === "Prazo"){
+          return new Date( a.dueDate).getTime()- new Date(b.dueDate).getTime(); //Ele transforma para milissegundos
+        }
+     })       //a = primeiroProduto e b  próximo produto
+    .map(item =>
       <ProductContainer
         key={item.id}>
         <p>{item.title}</p>
@@ -174,33 +203,52 @@ export default class CardProdutos extends Component {
         </div>
       </ProductContainer>)
 
-const servicosOrdenados = //2 passo
-this.productsToScreen &&
-this.productsToScreeeen.sort((a, b) => {
-  if (this.state.ordenacao === "Crescente") {
-    return a.price - b.price;
-  } else if(this.state.ordenacao === "Decrescente ") {
-    return b.price - a.price;
-   
-  }
-  else if(this.state.ordenacao === "Titulo"){
-    return titulo
-  } 
 
-  else {
-    return 
-  }
-});
 
     return (
       <div>
-        {this.state.toDetalhes &&
+
+<Cabecalho>
+        
+        <h3>Valor Mínimo</h3>
+        <input 
+        placeholder='Valor Mínimo'
+        type = "number"
+        value = {this.state.filtroMinimo}
+        onChange={ this.EventoMinimo}
+        />
+
+        <h3>Valor Máximo</h3>
+        <input  
+        placeholder='Valor Máximo'
+        type = "number"
+        value = {this.state.filtroMaximo}
+        onChange={ this.EventoMaximo}
+        />
+
+        <h3>Busca por nome</h3>
+        <input
+        placeholder='Busca por título ou descrição'
+        type = "text"
+        value = {this.state.filtroBuscaPorNome} //Sempre
+        onChange={this.EventoBuscaPornome}
+          
+        />
+          <h3>Ordenação</h3>
+           <select   value = {this.state.ordenacao}  onChange ={this.mudarOrdem}>     
+          <option value={"Crescente"}>Preço Crescente</option>
+          <option value={"Decrescente"}>Preço Decrescente</option>
+          <option value={"Titulo"}>Titulo</option>
+          <option value={"Prazo"}>Prazo</option>
+          </select>
+    </Cabecalho>
+        {/* {this.state.toDetalhes &&
           <Filtros servicosMapeados={this.productsToScreen}
             EventoBuscaPornome={this.EventoBuscaPornome}
             EventoMinimo={this.EventoMinimo}
             EventoMaximo={this.EventoMaximo}
 
-          />}
+          />} */}
 
         <Container>
 
