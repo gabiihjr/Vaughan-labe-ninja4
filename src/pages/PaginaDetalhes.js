@@ -13,20 +13,19 @@ const ButtonAdd = styled(Button)`
    width: 100%;
  }
 
- @media (max-width: 480px) {
-  &&width: 45%;
-  }
-
-
 `
 const ButtonVoltar = styled(Button)`
  &&{ 
    width: 100%;
  }
- @media (max-width: 480px) {
-  && width: 45%;
-  }
+`
+const ButtonsDiv = styled.div`
+width: 100%;
 
+@media (max-width: 480px) {
+  width: 100%;
+  display: flex;
+  }
 
 `
 
@@ -59,7 +58,7 @@ p {
     margin-top: 40%
 
   }
- 
+  
 
 
 `
@@ -114,12 +113,13 @@ export default class PaginaDetalhes extends Component {
         }</p>
         {this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..."}
         <p>{this.state.job.description}</p>
-       
+        <ButtonsDiv>
         <ButtonAdd size="large" variant="contained" color="primary" 
         onClick={() => this.props.onClickToCard(this.props.jobs, this.props.idJob)}
         >ADD</ButtonAdd>
         <ButtonVoltar size="large" variant="contained" color="secondary" 
         onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>
+        </ButtonsDiv>
       </PaginaDetalhesDiv >
     )
   }
