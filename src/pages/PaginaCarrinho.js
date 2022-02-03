@@ -18,15 +18,6 @@ const CarrinhoContainer = styled.div`
 
 export default class PaginaCarrinho extends Component {
 
-  componentDidUpdate() {
-    const carrinhoString = JSON.stringify(this.props.produtosNoCarrinho)
-    localStorage.setItem("Produtos no Carrinho", carrinhoString)
-  }
-
-  componentDidMount() {
-    JSON.parse(localStorage.getItem("Produtos no Carrinho"))
-  }
-
   calcularTotal = () => {
     let valorTotal = 0
     for (let produto of this.props.produtosNoCarrinho) {
