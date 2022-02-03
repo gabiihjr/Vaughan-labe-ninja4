@@ -1,6 +1,6 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button  from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import Axios from 'axios';
@@ -17,42 +17,64 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+
+p:first-child{ 
+  margin:1rem 1rem;
+  font-size: 1.5rem;
+  color:#7867BF;
+}
+
 p { 
   margin: 10px;
+   
 }
+`
+
+const ButtonAdd = styled(Button)`
+ &&{ 
+   width: 100%;
+ }
+
+`
+const ButtonVoltar = styled(Button)`
+ &&{ 
+   width: 100%;
+ }
+
 `
 
 export default class PaginaDetalhes extends Component {
 
-  state ={ 
+  state = {
     job: '',
     paymentMethods: [],
-    dueDate:'',
-    price:'',
+    dueDate: '',
+    price: '',
     produtosNoCarrinho: [],
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.getJobByID(this.props.idJob)
   }
 
-  getJobByID =(idJob)=> { 
-   const url = `${labeninjasURL}/jobs/${this.props.idJob}`; 
-   const axiosConfig = { headers: { Authorization: key } }
+  getJobByID = (idJob) => {
+    const url = `${labeninjasURL}/jobs/${this.props.idJob}`;
+    const axiosConfig = { headers: { Authorization: key } }
 
-   Axios
-      .get(url,axiosConfig)
+    Axios
+      .get(url, axiosConfig)
       .then(res => {
-        this.setState({job : res.data,
-         paymentMethods: res.data.paymentMethods,
-         dueDate: res.data.dueDate,
-         price:res.data.price,
+        this.setState({
+          job: res.data,
+          paymentMethods: res.data.paymentMethods,
+          dueDate: res.data.dueDate,
+          price: res.data.price,
         })
 
       })
       .catch(err => console.log(err))
   }
-  
+
   render() {
 
     return (
@@ -60,22 +82,22 @@ export default class PaginaDetalhes extends Component {
 
         <p>{this.state.job.title}</p>
         {/* <p>{this.state.job.paymentMethods.map(item => <>item</>)}</p> */}
-       
-         {this.state.paymentMethods.map(item => <span key={item}>{item}</span>)}
-        
+
+        {this.state.paymentMethods.map(item => <span key={item}>{item}</span>)}
+
         <p>{(this.state.price).toLocaleString('pt-BR',
-            { style: 'currency', currency: 'BRL' })  
-        
+          { style: 'currency', currency: 'BRL' })
+
         }</p>
-       { this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..." }
+        {this.state.dueDate ? <p>{new Date(this.state.dueDate).toLocaleDateString()}</p> : "Carregando..."}
         <p>{this.state.job.description}</p>
        
-        <Button size="large" variant="contained" color="primary" 
+        <ButtonAdd size="large" variant="contained" color="primary" 
         onClick={() => this.props.onClickToCard(this.props.idJob)}
-        >ADD</Button>
-        <Button size="large" variant="contained" color="secondary" 
-        onClick={this.props.onClickToReturn}>Volta</Button>
-      </PaginaDetalhesDiv>
+        >ADD</ButtonAdd>
+        <ButtonVoltar size="large" variant="contained" color="secondary" 
+        onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>
+      </PaginaDetalhesDiv >
     )
   }
 }
