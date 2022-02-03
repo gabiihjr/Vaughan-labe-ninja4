@@ -109,7 +109,6 @@ class App extends React.Component {
 				<Header mudarParaHome={this.mudarParaHome}
 				mudarParaCarrinho={this.mudarParaCarrinho}/>
 				{this.mudarPagina()}
-
 			</ThemeProvider>
 		)
 	}
