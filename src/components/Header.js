@@ -12,7 +12,13 @@ padding: 20px;
 border: solid 1px black;
 `
 
-
+export const CssButtons = styled.div`
+  padding: 0 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export default class Header extends React.Component {
 
@@ -20,9 +26,12 @@ export default class Header extends React.Component {
         return (
             <div>
                 <Cabeçario>
-                    <h1>LabeNinjas</h1>
-                    <Button onClick={this.props.mudarParaHome}>Home</Button>
-                    <Button onClick={this.props.mudarParaCarrinho}>Carrinho</Button>
+                <Button onClick={this.props.mudarParaHome}>Home</Button>
+                <h1>LabeNinjas</h1>      
+                    <CssButtons>
+                      
+                        <Button onClick={this.props.mudarParaCarrinho}>Carrinho</Button>
+                    </CssButtons>
                 </Cabeçario>
             </div>
         )
