@@ -34,6 +34,20 @@ const Titulo = styled.div`
   grid-area: 1 / 1 / 2 / 3;
 `
 
+const CarrinhoVazio = styled.p`
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px; 
+  background-color: #7867BF;
+  color: white;
+  padding: 20px;
+  border-radius: .5em;
+  width: 400px;
+  height: 100px;
+`
+
 export default class PaginaCarrinho extends Component {
 
   calcularTotal = () => {
@@ -52,11 +66,12 @@ export default class PaginaCarrinho extends Component {
   render() {
     return (
       <CarrinhoContainer>
-        <div>
+        <Titulo>
         <h1>Carrinho</h1>
         <Button variant="contained" color="primary" onClick={this.props.mudarParaLista}> Voltar para lista </Button>
-        </div>
-        <Cards>
+        </Titulo>
+        {this.props.produtosNoCarrinho.length <= 0 ? <CarrinhoVazio>Carrinho vazio!</CarrinhoVazio> : 
+        <><Cards>
         {this.props.produtosNoCarrinho.map((item) => {
           return <CardCarrinho itemCarrinho={item}
             removerDoCarrinho={this.props.removerDoCarrinho} />
@@ -65,7 +80,7 @@ export default class PaginaCarrinho extends Component {
         <Total>
         <h3>Total: R$ {this.calcularTotal()}.00</h3>
         <Button variant="contained" color="primary" onClick={this.alertaDeCompra}>Contratar serviços</Button>
-        </Total>
+        </Total></>}
       </CarrinhoContainer>
     )
   }

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-
 import { labeninjasURL, key } from '../constants/labeninjasAPI';
 import Axios from 'axios';
 import { red } from '@material-ui/core/colors';
-
-
 
 const ButtonAdd = styled(Button)`
  &&{ 
@@ -28,7 +25,6 @@ width: 100%;
   }
 
 `
-
 
 const PaginaDetalhesDiv = styled.div`
 border: 1px solid black; 
@@ -53,17 +49,12 @@ p {
    
 }
 
- 
   @media (max-width: 680px) {
     margin-top: 40%
 
   }
   
-
-
 `
-
-
 
 export default class PaginaDetalhes extends Component {
 
