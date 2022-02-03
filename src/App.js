@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		background-color: #F5F4FC;
+		font-family: 'Roboto', sans-serif;
 	}
 `
 
@@ -71,7 +72,6 @@ class App extends React.Component {
 	//! Data que vem  Api getAllJobs la do cardproduto. 
 	gettingDataAPP = (dataJobs) => {
 		console.log('gettingDataAPP', dataJobs)
-
 	}
 
 	mudarPagina = () => {
@@ -84,13 +84,17 @@ class App extends React.Component {
 				return <PaginaCarrinho 
 				produtosNoCarrinho={this.state.produtosNoCarrinho}
 				removerDoCarrinho={this.removerDoCarrinho}
-				deixarCarrinhoVazio={this.deixarCarrinhoVazio}/>
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+				mudarParaLista={this.mudarParaLista}
+				manterNoCarrinho={this.manterNoCarrinho}/>
 
 			case "lista":
 				return <CardProdutos onClickToCard={this.onClickToCard}
 				produtosNoCarrinho={this.state.produtosNoCarrinho}
 				removerDoCarrinho={this.removerDoCarrinho}
 				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+				manterNoCarrinho={this.manterNoCarrinho}
+				getAllJobs={this.getAllJobs}
 				/>
 			case "cadastro":
 				return <CardCadastro/>
