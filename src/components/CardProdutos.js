@@ -212,9 +212,6 @@ export default class CardProdutos extends Component {
           removerDoCarrinho = {this.removerDoCarrinho}
           deixarCarrinhoVazio = {this.deixarCarrinhoVazio}
           />
-        <Filtros
-          servicosMapeados={this.productsToScreen}
-           />
 
          {this.state.toDetalhes && 
          <Filtros servicosMapeados={this.productsToScreen}
@@ -224,10 +221,6 @@ export default class CardProdutos extends Component {
          
          />}
 
-
-
-
-          {this.state.toDetalhes ? productsToScreen : <PaginaDetalhes idJob={this.state.idJob} />}
         <Container>
 
           {this.state.toDetalhes ? productsToScreen : 
