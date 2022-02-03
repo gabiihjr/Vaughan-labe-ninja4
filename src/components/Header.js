@@ -10,6 +10,8 @@ align-items: center;
 background-color: #7867BF;
 padding: 20px;
 border: solid 1px black;
+height: 60px;
+color: #F5F4FC;
 `
 
 export const CssButtons = styled.div`
