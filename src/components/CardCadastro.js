@@ -115,8 +115,8 @@ export default class CardCadastro extends Component {
           <select required value={this.state.inputPayment} onChange={this.handleInputPayment}>
               <option value="" selected>Selecionar...</option>
               <option value="pix">Pix</option>
-              <option value="cartaocredito">Cartão de crédito</option>
-              <option value="cartaodebito">Cartão de Débito</option>
+              <option value="cartao de credito">Cartão de crédito</option>
+              <option value="cartao de debito">Cartão de Débito</option>
               <option value="boleto">Boleto</option>
           </select>
 
