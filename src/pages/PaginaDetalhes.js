@@ -93,7 +93,7 @@ export default class PaginaDetalhes extends Component {
         <p>{this.state.job.description}</p>
        
         <ButtonAdd size="large" variant="contained" color="primary" 
-        onClick={() => this.props.onClickToCard(this.props.idJob)}
+        onClick={() => this.props.onClickToCard(this.props.jobs, this.props.idJob)}
         >ADD</ButtonAdd>
         <ButtonVoltar size="large" variant="contained" color="secondary" 
         onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>

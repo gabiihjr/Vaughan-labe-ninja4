@@ -48,8 +48,18 @@ class App extends React.Component {
 	
 		  this.setState({ produtosNoCarrinho: novosProdutosNoCarrinho})
 		}
+	  }
 
-		
+	  removerDoCarrinho = (idProduto) => {
+		const copiaCarrinho = [...this.state.produtosNoCarrinho]
+		const ficaNoCarrinho = copiaCarrinho.filter((produto) => {
+		  return idProduto !== produto.id
+		})
+		this.setState({ produtosNoCarrinho: ficaNoCarrinho })
+	  }
+
+	  deixarCarrinhoVazio = () => {
+		this.setState({ produtosNoCarrinho: [] })
 	  }
 
 	//! Data que vem  Api getAllJobs la do cardproduto. 
@@ -58,16 +68,19 @@ class App extends React.Component {
 
 	}
 
-
 	mudarPagina = () => {
 		switch (this.state.paginaAtual) {
 			case "home":
-				return <CardProdutos onClickToCard={this.onClickToCard}/>
+				return <CardProdutos onClickToCard={this.onClickToCard}
+				produtosNoCarrinho={this.state.produtosNoCarrinho}
+				removerDoCarrinho={this.removerDoCarrinho}
+				deixarCarrinhoVazio={this.deixarCarrinhoVazio}
+				/>
 			case "carrinho":
-				return <PaginaCarrinho produtosNoCarrinho={this.state.produtosNoCarrinho}
-				onClickToCard ={this.onClickToCard}/>
+				return <PaginaCarrinho/>
 			default:
-				return <CardProdutos />
+				return <CardProdutos onClickToCard={this.onClickToCard}
+				produtosNoCarrinho={this.state.produtosNoCarrinho}/>
 		}
 	}
 
@@ -87,7 +100,6 @@ class App extends React.Component {
 				<Button>Seja um ninja</Button>
 
 				<CardCadastro/>
-				{/* <PaginaListagem gettingDataAPP={this.gettingDataAPP} /> */}
 				{this.mudarPagina()}
 
 			</ThemeProvider>
