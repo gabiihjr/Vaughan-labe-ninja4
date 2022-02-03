@@ -12,8 +12,6 @@ justify-content: space-between;
 align-items: center;
 margin: 10px;
 
-
-
 @media ( max-width:1100px){ 
 h3 { 
   display: none;
@@ -32,12 +30,8 @@ input , select {
   width: 230px;
   margin: 5px 10%;
   box-sizing: border-box;
+  }
 }
-/* flex-wrap:wrap; */
-
-}
-
-
 `
 
 const ProductContainer = styled.div`
@@ -82,7 +76,6 @@ button{
 }
 `
 
-
 const Container = styled.div`
   display: grid;
   grid-template-columns:repeat(4, 1fr) ;
@@ -103,14 +96,12 @@ const Container = styled.div`
   grid-template-columns:1fr ;
   }
 
-
-
 `
 
 export default class CardProdutos extends Component {
   state = {
     jobs: [],
-    toDetalhes:true,
+    toDetalhes: true,
     idJob: '',
     filtroMaximo: "",
     filtroMinimo: "",
@@ -236,7 +227,7 @@ export default class CardProdutos extends Component {
 
 
     return (
-       <div>
+      <div>
 
         <Cabecalho>
 
