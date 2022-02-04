@@ -32,7 +32,13 @@ export const EstiloTexto = styled.div`
     p{
      font-size: 1.2rem;  
     }
-margin-top: 5px;
+     margin-top: 5px;
+
+     @media (max-width:500px){ 
+            >p, >h1{ 
+                display: none;
+            }
+    }  
 `
 
 export const HomeButton = styled.div`
@@ -42,8 +48,24 @@ display: flex;
 justify-content: space-around;
 width: 50vw;
 button{
-  width  : 300px 
+  width: 300px 
 }
+
+ @media (max-width:720px){ 
+   margin-top:3rem;
+ }
+ @media (max-width:620px){ 
+    margin-top:5rem;
+   width: 80%;
+ }
+ @media (max-width:360px){ 
+   /* margin: 10rem 0 0 0;
+   width: 80%; */
+
+ >p{ 
+     display: none;
+ }
+ }
 `
 
 export default class Home extends React.Component {
@@ -58,14 +80,15 @@ export default class Home extends React.Component {
             <div>
                 <img src={imagemLogo} alt="labeninjasImagem" ></img>
             </div>
-            <EstiloTexto>
-            <h1>O que é o Labeninjas?</h1>
-<p>
-Labeninjas é a ponte entre o seu problema e a resolução dele. Te conectamos com profissionais para todo tipo de necessidade. São profissionais de todo brasil para te atender com qualidade e facilidade.
-</p>
+                <EstiloTexto>
+                <h1>O que é o Labeninjas?</h1>
+                <p>
+                    Labeninjas é a ponte entre o seu problema e a resolução dele. 
+                    Te conectamos com profissionais para todo tipo de necessidade. 
+                    São profissionais de todo brasil para te atender com qualidade e facilidade.
+                </p>
             </EstiloTexto>
           
-
             </EstiloHome>
         )
     }
