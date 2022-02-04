@@ -1,6 +1,7 @@
 # Projeto LabeNinjas
 
 ## Link Surge
+https://labeninjas-grupo4.surge.sh
 
 ## Descrição
 Projeto de uma plataforma de marketplace, servindo para dois tipos de clientes: prestadores de serviço e o contratante.
