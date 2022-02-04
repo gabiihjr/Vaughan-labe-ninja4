@@ -91,14 +91,29 @@ export default class PaginaDetalhes extends Component {
       .catch(err => console.log(err))
   }
 
+  deleteJob = (idJob) => {
+    const url = `${labeninjasURL}/jobs/${this.props.idJob}`
+    const axiosConfig = { headers: { Authorization: key } }
+
+    Axios
+    .delete(url, axiosConfig)
+    .then(response => {
+      alert("Serviço deletado com sucesso!")
+      this.props.onClickToReturn()
+      this.props.getAllJobs()
+      
+    })
+    .catch(error => console.log(error))
+  }
+
+
   render() {
 
     return (
       <PaginaDetalhesDiv>
 
         <p>{this.state.job.title}</p>
-        {/* <p>{this.state.job.paymentMethods.map(item => <>item</>)}</p> */}
-
+        
         {this.state.paymentMethods.map(item => <span key={item}>{item}</span>)}
 
         <p>{(this.state.price).toLocaleString('pt-BR',
@@ -114,6 +129,7 @@ export default class PaginaDetalhes extends Component {
         <ButtonVoltar size="large" variant="contained" color="secondary" 
         onClick={this.props.onClickToReturn}>Voltar</ButtonVoltar>
         </ButtonsDiv>
+        <Button onClick={() => this.deleteJob(this.props.idJob)}>DELETE</Button>
       </PaginaDetalhesDiv >
     )
   }

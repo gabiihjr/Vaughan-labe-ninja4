@@ -119,7 +119,7 @@ export default class CardProdutos extends Component {
   }
 
   data = [];
-  componentDidMount(data) {
+  componentDidMount() {
     this.getAllJobs();
   }
 
@@ -308,6 +308,7 @@ export default class CardProdutos extends Component {
               jobs={this.state.jobs}
               pegarIdProduto={this.pegarIdProduto}
               onClickToCard={this.props.onClickToCard}
+              getAllJobs={this.getAllJobs}
             />}
         </Container>
       </div>
