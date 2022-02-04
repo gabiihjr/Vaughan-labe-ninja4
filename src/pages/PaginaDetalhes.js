@@ -27,16 +27,19 @@ width: 100%;
 `
 
 const PaginaDetalhesDiv = styled.div`
-border: 1px solid black; 
-margin: 20% auto;
+box-shadow: 2px 1px 5px #f4f2fa;
+margin: 10% auto;
 width: 70vw;
 max-width: 500px;
 grid-column: 1/-1;
 display: flex;
+background-color: #dad1ff;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 text-align:center;
+border-radius: 5px;
+box-sizing: border-box;
 
 p:first-child{ 
   margin:1rem 1rem;
