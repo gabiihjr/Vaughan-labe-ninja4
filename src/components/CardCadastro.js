@@ -1,49 +1,9 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { key } from '../constants/labeninjasAPI'
+import React, { Component } from 'react';
+import axios from 'axios';
+import { key } from '../constants/labeninjasAPI';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import styled from 'styled-components'
-
-
-const ContainerPrincipal = styled.div`
-  color: #4A4A4A;
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 40%;
-  text-align: left;
-  margin: 2% 30%;
-  h2 {
-    align-self: center;
-    font-size: 2rem;
-  }
-`
-
-const Pagamento = styled.div`
-  display: flex;
-  flex-direction: column;
-  p {
-    margin: 2% 0;
-    text-align: left;
-    color: #6e6e6e;
-  }
-`
-const Form = styled.form` 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 3%;
-`
-
-const Checkbox = styled.div` 
-  text-align: left;
-`
-const P = styled.p` 
-  margin-top: 2%;
-  color: #6e6e6e;
-`
-
+import { ContainerPrincipal, Pagamento, Form, Checkbox, P } from './styled-cardcadastro';
 
 export default class CardCadastro extends Component {
   state = {
@@ -53,7 +13,6 @@ export default class CardCadastro extends Component {
     inputPayment: [],
     inputDate: ""
   }
-
 
   handleInputTitle = (event) => {
     this.setState({ inputTitle: event.target.value })
@@ -87,16 +46,19 @@ export default class CardCadastro extends Component {
       paymentMethods: this.state.inputPayment,
       dueDate: this.state.inputDate
     }
-    console.log(body)
     const auth = { headers: { Authorization: key } }
     axios.post(url, body, auth)
       .then((response) => {
         alert(response.data.message)
+        this.setState({ inputTitle: "",
+        inputDescription: "",
+        inputPrice: "",
+        inputPayment: [],
+        inputDate: ""})
       })
-      .catch((error) => console.log(error))
+      .catch((error) => alert(error))
     event.preventDefault()
   }
-
 
   render() {
     return (

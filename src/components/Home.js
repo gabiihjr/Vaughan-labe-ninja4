@@ -1,72 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import imagemLogo from '../images/labeninjasImagem.png'
-import imagemCategorias from '../images/categoriasninjas.png'
-
-import styled from "styled-components";
-
-export const EstiloHome = styled.div`
-    background-color: #f3f3fb;
-   // width: 100vw;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: 'blue'; 
-
-`
-export const EstiloTexto = styled.div`
-    background-color: #f3f3fb;
-    width: 50vw;
-   // height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #4A4A4A;
-    h1{
-       margin-bottom: 20px;
-
-    }
-    p{
-     font-size: 1.2rem;  
-    }
-     margin-top: 5px;
-
-     @media (max-width:500px){ 
-            >p, >h1{ 
-                display: none;
-            }
-    }  
-`
-
-export const HomeButton = styled.div`
-margin: 35px;
-//margin-top: 60px;
-display: flex;
-justify-content: space-around;
-width: 50vw;
-button{
-  width: 300px 
-}
-
- @media (max-width:720px){ 
-   margin-top:3rem;
- }
- @media (max-width:620px){ 
-    margin-top:5rem;
-   width: 80%;
- }
- @media (max-width:360px){ 
-   /* margin: 10rem 0 0 0;
-   width: 80%; */
-
- >p{ 
-     display: none;
- }
- }
-`
+import {EstiloHome, EstiloTexto, HomeButton} from './styled-home'
 
 export default class Home extends React.Component {
     render () {
