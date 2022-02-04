@@ -22,7 +22,28 @@ color: #F5F4FC;
 }
 `
 
+const AddShoppingCartIconStyled = styled(AddShoppingCartIcon)`
+&& {width:60px;
+height: 60px;
+}
 
+@media(max-width:720px ){ 
+&& {width:50px;
+height: 50px;
+}
+}
+@media(max-width:520px ){ 
+&& {width:40px;
+height: 40px;
+}
+}
+@media(max-width:360px ){ 
+&& {width:30px;
+height: 30px;
+}
+}
+
+`
 
 export default class Header extends React.Component {
 
@@ -30,9 +51,13 @@ export default class Header extends React.Component {
         return (
             <div>
                 <Cabeçario>
-                    <Button onClick={this.props.mudarParaHome}>Home</Button>
+                    <Button onClick={this.props.mudarParaHome}>
+                        Home
+                    </Button>
                     <h1>LabeNinjas</h1>
-                        <Button onClick={this.props.mudarParaCarrinho}> <AddShoppingCartIcon /></Button>
+                    <Button onClick={this.props.mudarParaCarrinho}>
+                        <AddShoppingCartIconStyled />
+                    </Button>
                 </Cabeçario>
             </div>
         )
