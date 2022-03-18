@@ -4,7 +4,7 @@
 https://labeninjas-grupo4.surge.sh
 
 ## Descrição
-Projeto de uma plataforma de marketplace, servindo para dois tipos de clientes: prestadores de serviço e o contratante.
+Projeto desenvolvido no curso Labenu de uma plataforma de marketplace, servindo para dois tipos de clientes: prestadores de serviço e o contratante.
 O site conta com a área de cadastro, lista de serviços, e a do carrinho. 
 Na página de lista de serviços é possível ver os detalhes de cada serviço ofertado.
 
@@ -55,5 +55,3 @@ A plataforma foi criada desktop-first mas é responsiva para qualquer mobile.
 ![image](https://user-images.githubusercontent.com/94693150/152602181-f0deb14f-3ebc-4ef8-92fc-7b66b4f8331c.png)
 ![image](https://user-images.githubusercontent.com/94693150/152601613-51536cb9-f2f4-4098-becd-4a5253842e4c.png)
 ![image](https://user-images.githubusercontent.com/94693150/152602772-b71e8762-86d9-4fe8-b6ef-f5c5ccfa0cb0.png)
-
-# Correção
